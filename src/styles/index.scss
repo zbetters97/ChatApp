@@ -1,0 +1,70 @@
+@use "src/styles/abstracts" as *;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: $font-primary;
+  text-decoration: none;
+}
+
+body {
+  background-color: $background;
+  color: $basic-white;
+  min-height: 100vh;
+  min-height: 100svh;
+
+  .lock-scroll {
+    overflow: hidden;
+  }
+}
+
+.lock-scroll {
+  position: fixed;
+  width: 100%;
+}
+
+.wrapper {
+  @include flexcol();
+  height: 100dvh;
+  height: 100svh;
+}
+
+main {
+  @include flexcol();
+  flex: 1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+input {
+  border: none;
+  background-color: transparent;
+}
+
+select {
+  border: none;
+}
+
+.empty__message {
+  margin: auto;
+  padding: 4em 0;
+  width: fit-content;
+  max-width: 500px;
+  text-align: center;
+}
