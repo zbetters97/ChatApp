@@ -47,6 +47,7 @@ ul {
 }
 
 button {
+  color: $basic-white;
   cursor: pointer;
   border: none;
   background-color: transparent;
@@ -59,6 +60,10 @@ input {
 
 select {
   border: none;
+
+  option {
+    color: $basic-white !important;
+  }
 }
 
 .empty__message {
