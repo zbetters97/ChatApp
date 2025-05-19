@@ -1,8 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { useAuthContext } from "src/features/auth/context/AuthContext";
 
 export default function Navbar({ unreadMessages }) {
+  const { globalUser } = useAuthContext();
+
   return (
     <header className="nav">
       <nav className="navbar">
@@ -11,7 +14,7 @@ export default function Navbar({ unreadMessages }) {
           <NotificationBadge unreadCount={unreadMessages} link="/messages" />
         </div>
 
-        <LoginButton />
+        {globalUser ? <p>{globalUser.displayname}</p> : <LoginButton />}
       </nav>
     </header>
   );

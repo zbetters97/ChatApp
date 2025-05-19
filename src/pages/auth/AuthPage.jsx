@@ -37,12 +37,15 @@ export default function AuthPage() {
 
   return (
     <section className="auth">
-      <Header isSignup={isSignup} />
-      {isSignup ? (
-        <Signup setIsSignup={setIsSignup} />
-      ) : (
-        <Login setIsSignup={setIsSignup} />
-      )}
+      <div className="auth__container">
+        <Header isSignup={isSignup} />
+
+        {isSignup ? (
+          <Signup setIsSignup={setIsSignup} />
+        ) : (
+          <Login setIsSignup={setIsSignup} />
+        )}
+      </div>
     </section>
   );
 }
