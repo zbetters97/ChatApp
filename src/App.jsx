@@ -16,16 +16,16 @@ export default function App() {
       children: [
         {
           index: true,
-          element: <Navigate to="/home" />,
+          element: <Navigate to="/messages" />,
         },
         {
-          path: "/home",
-          element: <Pages.HomePage />,
+          path: "/auth",
+          element: <Pages.AuthPage />,
           errorElement: <Pages.ErrorPage is404={false} />,
         },
         {
-          path: "/authenticate",
-          element: <Pages.AuthPage />,
+          path: "/messages",
+          element: <Pages.ChatPage />,
           errorElement: <Pages.ErrorPage is404={false} />,
         },
         {

@@ -21,7 +21,7 @@
     top: 100%;
     right: 0;
     left: 0;
-    background-color: green;
+    background-color: $basic-green;
 
     &[aria-expanded="true"] {
       height: fit-content;
@@ -32,11 +32,11 @@
 
   &__user {
     @include flexrow(initial, center, 0.25em);
-    padding: 0.25em 0.5em;
+    padding: 1em;
     text-align: left;
 
     &:hover {
-      background-color: darkgreen;
+      background-color: $darker-green;
     }
   }
 

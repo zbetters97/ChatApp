@@ -1,9 +1,8 @@
 @use "src/styles/abstracts" as *;
 
-.home {
+.chat {
   @include flexrow(initial, stretch);
   margin: auto;
   width: 100%;
-  max-width: 1000px;
-  height: 80vh;
+  height: 100%;
 }

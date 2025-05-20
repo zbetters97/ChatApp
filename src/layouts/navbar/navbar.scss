@@ -1,0 +1,31 @@
+@use "src/styles/abstracts" as *;
+
+.nav {
+  height: 100%;
+  background-color: black;
+  padding: 2em;
+}
+
+.navbar {
+  @include flexcol(center, center, 2em);
+  height: 100%;
+  position: relative;
+
+  &__link {
+    @include font(1.25);
+
+    &:hover {
+      color: gray;
+    }
+
+    &[aria-current="page"] {
+      color: $lighter-green;
+    }
+  }
+
+  &__profile {
+    @include flexcol(center, center, 2em);
+    position: absolute;
+    bottom: 0;
+  }
+}

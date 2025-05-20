@@ -3,8 +3,8 @@
 .message {
   @include flexrow(initial, start, 0.5em);
   position: relative;
-  border-radius: 12px;
-  padding: 0.75em 1em;
+  border-radius: 20px;
+  padding: 0.75em;
   width: fit-content;
   max-width: 80%;
 
@@ -24,11 +24,13 @@
 
   &--user {
     margin-left: auto;
-    background-color: darkblue;
+    background-color: #043ab8;
+    border-bottom-right-radius: 2px;
   }
 
   &--friend {
-    background-color: gray;
+    background-color: #3e404c;
+    border-bottom-left-radius: 2px;
   }
 
   &__container {
@@ -45,7 +47,7 @@
 
   &__delete {
     top: 50%;
-    left: -10%;
+    left: -20%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 5px $basic-black;
     color: gray;
@@ -79,8 +81,8 @@
 
     &--liked {
       opacity: 1;
-      background-color: darkblue;
-      color: red;
+      background-color: #003e8f;
+      color: $basic-red;
     }
 
     &--unliked {
@@ -90,7 +92,7 @@
   }
 
   &__text {
-    @include font(0.75);
+    @include font(0.5);
     width: fit-content;
     word-break: break-all;
 
@@ -101,7 +103,7 @@
 
   &__time {
     @include font(0.25, normal, gray);
-    padding: 0 0.5em;
+    @include padding-x(0.5em);
     width: fit-content;
 
     &--user {

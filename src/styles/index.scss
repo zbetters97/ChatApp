@@ -26,17 +26,6 @@ body {
   width: 100%;
 }
 
-.wrapper {
-  @include flexcol();
-  height: 100dvh;
-  height: 100svh;
-}
-
-main {
-  @include flexcol();
-  flex: 1;
-}
-
 a {
   color: inherit;
   text-decoration: none;
@@ -67,8 +56,8 @@ select {
 }
 
 .empty__message {
+  @include padding-y(4em);
   margin: auto;
-  padding: 4em 0;
   width: fit-content;
   max-width: 500px;
   text-align: center;

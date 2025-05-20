@@ -7,6 +7,16 @@
   font-size: calc(#{$size}rem + 0.5vw);
 }
 
+@mixin padding-y($padding) {
+  padding-top: $padding;
+  padding-bottom: $padding;
+}
+
+@mixin padding-x($padding) {
+  padding-right: $padding;
+  padding-left: $padding;
+}
+
 @mixin flexrow($justify: initial, $align: initial, $gap: initial) {
   display: flex;
   flex-direction: row;

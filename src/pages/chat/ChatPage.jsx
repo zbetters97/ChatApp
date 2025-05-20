@@ -4,12 +4,11 @@ import ChatList from "src/features/chat/components/list/ChatList";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
 import { useChatContext } from "src/features/chat/context/ChatContext";
 import ChatWindow from "src/features/chat/components/sections/ChatWindow";
-import "./home-page.scss";
+import "./chat-page.scss";
 
-export default function Home() {
+export default function ChatPage() {
   const { globalUser, loadingUser } = useAuthContext();
-  const { setActiveChatId, setActiveChatUser, setIsCollapsed, readMessage } =
-    useChatContext();
+  const { setActiveChatId, setActiveChatUser, readMessage } = useChatContext();
 
   const [chatWindowKey, setChatWindowKey] = useState(0);
 
@@ -22,7 +21,7 @@ export default function Home() {
       }
 
       if (!globalUser) {
-        navigate("/authenticate");
+        navigate("/auth");
       }
     };
 
@@ -38,7 +37,7 @@ export default function Home() {
   }
 
   return (
-    <section className="home">
+    <section className="chat">
       <ChatList handleOpenChat={handleOpenChat} />
       <ChatWindow key={chatWindowKey} />
     </section>

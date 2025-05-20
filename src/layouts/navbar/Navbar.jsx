@@ -1,37 +1,42 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import {
+  faComment,
+  faCommentDots,
+  faEnvelope,
+  faGear,
+  faHome,
+  faMessage,
+  faRightFromBracket,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
+import "./navbar.scss";
 
 export default function Navbar({ unreadMessages }) {
   const { globalUser } = useAuthContext();
 
+  const location = useLocation();
+
+  if (location.pathname === "/auth") {
+    return null;
+  }
+
   return (
     <header className="nav">
       <nav className="navbar">
+        <NavItem to="/home" icon={faHome} />
+
         <div className="navbar__messages">
-          <NavItem link="/messages" icon={faEnvelope} />
+          <NavItem to="/messages" icon={faCommentDots} />
           <NotificationBadge unreadCount={unreadMessages} link="/messages" />
         </div>
 
-        {globalUser ? (
-          <div>
-            <p>{globalUser.displayname}</p>
-            <LogoutButton />{" "}
-          </div>
-        ) : (
-          <LoginButton />
-        )}
+        <NavItem to="/settings" icon={faGear} />
+
+        {globalUser && <NavProfile />}
       </nav>
     </header>
-  );
-}
-
-function NavItem({ link, icon }) {
-  return (
-    <NavLink to={link} className="navbar__link" aria-current="page">
-      <FontAwesomeIcon icon={icon} />
-    </NavLink>
   );
 }
 
@@ -44,11 +49,12 @@ function NotificationBadge({ unreadCount, link }) {
   );
 }
 
-function LoginButton() {
+function NavProfile() {
   return (
-    <Link to="/authenticate" className="navbar__login">
-      LOG IN
-    </Link>
+    <div className="navbar__profile">
+      <NavItem to="/user" icon={faUser} />
+      <LogoutButton />
+    </div>
   );
 }
 
@@ -56,8 +62,16 @@ function LogoutButton() {
   const { logout } = useAuthContext();
 
   return (
-    <button type="button" onClick={logout}>
-      Log out
+    <button type="button" onClick={logout} className="navbar__link">
+      <FontAwesomeIcon icon={faRightFromBracket} />
     </button>
+  );
+}
+
+function NavItem({ to, icon }) {
+  return (
+    <NavLink to={to} className="navbar__link" aria-current="page">
+      <FontAwesomeIcon icon={icon} />
+    </NavLink>
   );
 }

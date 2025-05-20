@@ -4,6 +4,7 @@
   @include font(0.5);
   @include flexrow(space-between, center, 0.25em);
   border: 1px solid gray;
+  background-color: #081729;
   padding: 0.75em;
 
   &:focus-within {
@@ -23,7 +24,11 @@
     color: gray;
 
     &:hover {
-      color: green;
+      color: $basic-green;
+    }
+
+    &--active {
+      color: $basic-green;
     }
   }
 }

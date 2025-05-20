@@ -1,0 +1,17 @@
+@use "src/styles/abstracts" as *;
+
+.wrapper {
+  @include flexcol();
+  height: 100dvh;
+  height: 100svh;
+}
+
+main {
+  @include flexrow(center, center);
+  background-color: #0a1d33;
+  margin: auto;
+  width: 100%;
+  max-width: 1200px;
+  height: 80dvh;
+  height: 80svh;
+}

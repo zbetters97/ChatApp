@@ -5,7 +5,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { useChatContext } from "src/features/chat/context/ChatContext.js";
 import { useAuthContext } from "src/features/auth/context/AuthContext.js";
 import Navbar from "./navbar/Navbar.jsx";
-import Footer from "./footer/Footer.jsx";
+import "./layout.scss";
 
 export default function Layout() {
   const { globalUser } = useAuthContext();
@@ -34,13 +34,10 @@ export default function Layout() {
 
   return (
     <div className="wrapper">
-      <Navbar unreadMessages={unreadMessages} />
-
       <main>
+        <Navbar unreadMessages={unreadMessages} />
         <Outlet />
       </main>
-
-      <Footer />
     </div>
   );
 }

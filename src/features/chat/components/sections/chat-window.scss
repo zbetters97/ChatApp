@@ -3,7 +3,7 @@
 .chats {
   @include flexcol($gap: 0.25em);
   flex: 2;
-  background-color: darkslategray;
+  background-color: #0a1d33;
   padding: 1em 2em;
   overflow-y: auto;
 
@@ -31,7 +31,7 @@
 
   &__date {
     @include font(0.5, normal, gray);
+    @include padding-y(1.5em);
     align-self: center;
-    padding: 1.5em 0;
   }
 }

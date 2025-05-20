@@ -2,11 +2,11 @@
 
 .alert {
   @include font(0.5, normal, $basic-white, italic);
+  @include padding-y(1em);
   @include flexrow(center, center, 0.5em);
   opacity: 0;
   transition: all 0.2s;
   margin: 0 auto;
-  padding: 1em 0;
   width: fit-content;
   height: 20px;
 
@@ -15,6 +15,6 @@
   }
 
   &__icon {
-    color: red;
+    color: $basic-red;
   }
 }
