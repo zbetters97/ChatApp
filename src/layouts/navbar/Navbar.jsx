@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
 import { useThemeContext } from "src/features/theme/context/ThemeContext";
@@ -63,8 +63,15 @@ function NavProfile() {
 function LogoutButton() {
   const { logout } = useAuthContext();
 
+  const navigate = useNavigate();
+
+  const handleClick = async () => {
+    await logout();
+    navigate("/auth");
+  };
+
   return (
-    <button type="button" onClick={logout} className="navbar__link">
+    <button type="button" onClick={handleClick} className="navbar__link">
       <FontAwesomeIcon icon={faRightFromBracket} />
     </button>
   );
