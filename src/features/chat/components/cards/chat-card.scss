@@ -5,7 +5,14 @@
   cursor: pointer;
   padding: 1em;
   border-radius: 12px;
-  background-color: $basic-gray;
+
+  &--light {
+    background-color: $light-gray;
+  }
+
+  &--dark {
+    background-color: $basic-gray;
+  }
 
   &[aria-selected="true"] {
     background-color: $basic-blue;

@@ -2,12 +2,14 @@ import { useRef, useState } from "react";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
+import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import { useChatContext } from "../../context/ChatContext";
 import "./new-message.scss";
 
 export default function MessageInput() {
   const { globalUser } = useAuthContext();
   const { activeChatId, activeChatUser, sendMessage } = useChatContext();
+  const { theme } = useThemeContext();
 
   const [active, setActive] = useState(false);
 
@@ -33,7 +35,10 @@ export default function MessageInput() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="new-message">
+    <form
+      onSubmit={handleSubmit}
+      className={`new-message new-message--${theme}`}
+    >
       <FormInput inputRef={inputRef} setActive={setActive} />
       <SubmitButton active={active} />
     </form>

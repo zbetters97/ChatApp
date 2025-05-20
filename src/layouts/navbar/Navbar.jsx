@@ -1,20 +1,20 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useAuthContext } from "src/features/auth/context/AuthContext";
+import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import {
-  faComment,
   faCommentDots,
-  faEnvelope,
   faGear,
   faHome,
-  faMessage,
   faRightFromBracket,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { useAuthContext } from "src/features/auth/context/AuthContext";
+import ThemeToggle from "../buttons/ThemeToggle";
 import "./navbar.scss";
 
 export default function Navbar({ unreadMessages }) {
   const { globalUser } = useAuthContext();
+  const { theme } = useThemeContext();
 
   const location = useLocation();
 
@@ -23,8 +23,10 @@ export default function Navbar({ unreadMessages }) {
   }
 
   return (
-    <header className="nav">
-      <nav className="navbar">
+    <header className={`nav nav--${theme}`}>
+      <nav className={`navbar navbar--${theme}`}>
+        <ThemeToggle />
+
         <NavItem to="/home" icon={faHome} />
 
         <div className="navbar__messages">

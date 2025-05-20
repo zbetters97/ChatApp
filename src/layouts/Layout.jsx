@@ -4,12 +4,14 @@ import { db } from "src/config/firebase.js";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useChatContext } from "src/features/chat/context/ChatContext.js";
 import { useAuthContext } from "src/features/auth/context/AuthContext.js";
+import { useThemeContext } from "src/features/theme/context/ThemeContext.js";
 import Navbar from "./navbar/Navbar.jsx";
 import "./layout.scss";
 
 export default function Layout() {
   const { globalUser } = useAuthContext();
   const { chats, getUnreadChatsByUserId } = useChatContext();
+  const { theme } = useThemeContext();
 
   const [unreadMessages, setUnreadMessages] = useState(0);
 
@@ -33,7 +35,7 @@ export default function Layout() {
   }, [globalUser, chats]);
 
   return (
-    <div className="wrapper">
+    <div className={`wrapper wrapper--${theme}`}>
       <main>
         <Navbar unreadMessages={unreadMessages} />
         <Outlet />

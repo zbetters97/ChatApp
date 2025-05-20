@@ -1,5 +1,6 @@
 import { Link, useRouteError } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import {
   faExclamationTriangle,
   faHome,
@@ -7,6 +8,8 @@ import {
 import "./error-page.scss";
 
 export default function ErrorPage({ is404 }) {
+  const { theme } = useThemeContext();
+
   const error = useRouteError();
 
   const errorMessage = is404
@@ -14,7 +17,7 @@ export default function ErrorPage({ is404 }) {
     : "Oops! Something went wrong :(";
 
   return (
-    <section className="error">
+    <section className={`error error--${theme}`}>
       <FontAwesomeIcon icon={faExclamationTriangle} className="error__icon" />
 
       <h1 className="error__header">{errorMessage}</h1>

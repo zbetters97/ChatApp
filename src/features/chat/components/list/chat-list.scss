@@ -5,8 +5,39 @@
   position: relative;
   flex: 1;
   transition: all 0.2s;
-  background-color: $darker-blue;
   border-radius: 12px;
+
+  &--light {
+    background-color: $light-white;
+
+    .chatlist__header {
+      color: $basic-black;
+    }
+
+    .chatlist__compose {
+      color: $basic-black;
+
+      &:hover {
+        color: $lighter-gray;
+      }
+    }
+  }
+
+  &--dark {
+    background-color: $darker-blue;
+
+    .chatlist__header {
+      color: $basic-white;
+    }
+
+    .chatlist__compose {
+      color: $basic-white;
+
+      &:hover {
+        color: $light-gray;
+      }
+    }
+  }
 
   &__header {
     @include font(0.5, bold);
@@ -18,16 +49,11 @@
   &__compose {
     @include font(1);
     cursor: pointer;
-    color: $basic-white;
-
-    &:hover {
-      color: $light-gray;
-    }
   }
 
   &__chats {
     @include flexcol(initial, stretch, 2em);
-    overflow-y: auto;
     padding: 1em;
+    overflow-y: auto;
   }
 }

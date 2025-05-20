@@ -2,12 +2,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useChatContext } from "src/features/chat/context/ChatContext";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
+import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import ChatCard from "../cards/ChatCard";
 import "./chat-list.scss";
 
 export default function ChatList({ handleOpenChat }) {
+  const { theme } = useThemeContext();
+
   return (
-    <section className="chatlist">
+    <section className={`chatlist chatlist--${theme}`}>
       <Header />
       <Chats handleOpenChat={handleOpenChat} />
     </section>

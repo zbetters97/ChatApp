@@ -4,12 +4,30 @@
   @include flexcol();
   height: 100dvh;
   height: 100svh;
+
+  &--light {
+    background-color: $background-light;
+    color: $basic-black;
+
+    main {
+      background-color: $dark-white;
+    }
+  }
+
+  &--dark {
+    background-color: $background-dark;
+    color: $basic-white;
+
+    main {
+      background-color: $dark-blue;
+    }
+  }
 }
 
 main {
   @include flexrow(center, center);
   margin: auto;
-  background-color: $dark-blue;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   width: 100%;
   max-width: 1400px;
   height: 100%;

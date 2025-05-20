@@ -11,8 +11,6 @@
 }
 
 body {
-  background-color: $background;
-  color: $basic-white;
   min-height: 100vh;
   min-height: 100svh;
 
@@ -24,6 +22,10 @@ body {
 .lock-scroll {
   position: fixed;
   width: 100%;
+}
+
+p {
+  color: $basic-white;
 }
 
 a {

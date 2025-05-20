@@ -1,14 +1,17 @@
 import { useRef, useState } from "react";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
+import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import { useChatContext } from "../../context/ChatContext";
 import "./chat-search.scss";
 
 export default function ChatSearch() {
+  const { theme } = useThemeContext();
+
   const [users, setUsers] = useState([]);
   const inputRef = useRef(null);
 
   return (
-    <div className="chat-search">
+    <div className={`chat-search chat-search--${theme}`}>
       <SearchInput inputRef={inputRef} setUsers={setUsers} />
       <SearchResults users={users} setUsers={setUsers} inputRef={inputRef} />
     </div>

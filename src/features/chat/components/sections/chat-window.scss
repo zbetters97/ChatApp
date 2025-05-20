@@ -3,10 +3,34 @@
 .chats {
   @include flexcol($gap: 0.25em);
   flex: 2;
-  background-color: $darker-blue;
+  border-radius: 12px;
   padding: 1em 2em;
   overflow-y: auto;
-  border-radius: 12px;
+
+  &--light {
+    background-color: $light-white;
+
+    .chats__header {
+      border-color: $basic-gray;
+      color: $basic-black;
+    }
+
+    .chats__date {
+      color: $basic-gray;
+    }
+  }
+
+  &--dark {
+    background-color: $darker-blue;
+
+    .chats__header {
+      color: $basic-white;
+    }
+
+    .chats__date {
+      color: $light-gray;
+    }
+  }
 
   &__header {
     @include font(0.5, bold);
@@ -31,7 +55,7 @@
   }
 
   &__date {
-    @include font(0.5, normal, $light-gray);
+    @include font(0.5, normal);
     @include padding-y(1.5em);
     align-self: center;
   }

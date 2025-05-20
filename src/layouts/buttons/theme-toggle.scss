@@ -1,60 +1,6 @@
 @use "src/styles/abstracts" as *;
 
-.nav {
-  height: 100%;
-  padding: 2em;
-
-  &--light {
-    background-color: $light-white;
-  }
-
-  &--dark {
-    background-color: black;
-  }
-}
-
-.navbar {
-  @include flexcol(center, center, 2em);
-  height: 100%;
-  position: relative;
-
-  &--light &__link {
-    color: $light-gray;
-
-    &:hover {
-      color: $lighter-green;
-    }
-  }
-
-  &--dark &__link {
-    color: $basic-white;
-
-    &:hover {
-      color: $lighter-green;
-    }
-  }
-
-  &__link {
-    @include font(1.25);
-
-    &[aria-current="page"] {
-      color: $lighter-green;
-    }
-  }
-
-  &__toggle {
-    position: absolute;
-    top: 0;
-  }
-
-  &__profile {
-    @include flexcol(center, center, 2em);
-    position: absolute;
-    bottom: 0;
-  }
-}
-
-.toggle {
+.theme-toggle {
   display: inline-block;
   position: relative;
   width: 50px;
@@ -75,11 +21,11 @@
     width: 0;
     height: 0;
 
-    &:checked + .toggle__slider {
+    &:checked + .theme-toggle__slider {
       background-color: $basic-green;
     }
 
-    &:checked + .toggle__slider:before {
+    &:checked + .theme-toggle__slider:before {
       transform: translateX(22px);
     }
   }

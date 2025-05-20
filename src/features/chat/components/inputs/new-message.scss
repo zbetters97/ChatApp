@@ -4,11 +4,23 @@
   @include font(0.5);
   @include flexrow(space-between, center, 0.25em);
   border: 1px solid $light-gray;
-  background-color: $dark-blue;
   padding: 0.75em;
 
-  &:focus-within {
-    border-color: $basic-white;
+  &--light {
+    border-color: transparent;
+    background-color: $dark-white;
+
+    .new-message__input {
+      color: $basic-black;
+    }
+  }
+
+  &--dark {
+    background-color: $dark-blue;
+
+    &:focus-within {
+      border-color: $basic-white;
+    }
   }
 
   &__input {
@@ -17,15 +29,18 @@
     outline: none;
     width: 100%;
 
+    &--dark {
+      color: $basic-white;
+    }
+
     &::placeholder {
       color: $light-gray;
     }
   }
 
   &__button {
-    @include font(0.75);
+    @include font(0.75, normal, $light-gray);
     cursor: pointer;
-    color: $light-gray;
 
     &:hover {
       color: $lighter-green;

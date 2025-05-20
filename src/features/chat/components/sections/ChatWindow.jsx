@@ -3,6 +3,7 @@ import { db } from "src/config/firebase";
 import { formatDateDMD } from "src/utils/date";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
+import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import NewMessage from "../inputs/NewMessage";
 import ChatSearch from "../inputs/ChatSearch";
 import MessageCard from "../cards/MessageCard";
@@ -12,6 +13,7 @@ import "./chat-window.scss";
 export default function ChatWindow() {
   const { globalUser } = useAuthContext();
   const { activeChatId, activeChatUser, readMessage } = useChatContext();
+  const { theme } = useThemeContext();
 
   const [messages, setMessages] = useState([]);
 
@@ -69,14 +71,14 @@ export default function ChatWindow() {
 
   if (activeChatId === -1) {
     return (
-      <section className="chats">
+      <section className={`chats chats--${theme}`}>
         <ChatSearch />
       </section>
     );
   }
 
   return (
-    <section className="chats">
+    <section className={`chats chats--${theme}`}>
       <Header />
       <Messages messages={messages} />
       <NewMessage />

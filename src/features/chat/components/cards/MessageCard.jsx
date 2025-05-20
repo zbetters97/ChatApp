@@ -1,11 +1,14 @@
-import { useAuthContext } from "src/features/auth/context/AuthContext";
-import { useChatContext } from "../../context/ChatContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useAuthContext } from "src/features/auth/context/AuthContext";
+import { useThemeContext } from "src/features/theme/context/ThemeContext";
+import { useChatContext } from "../../context/ChatContext";
 import "./message-card.scss";
 
 export default function MessageCard({ message }) {
   const { globalUser } = useAuthContext();
+  const { theme } = useThemeContext();
+
   const isCurrentUser = message.senderId === globalUser.uid;
 
   function handleClick(e) {
@@ -22,7 +25,7 @@ export default function MessageCard({ message }) {
     <div className="message__container">
       <div
         onClick={handleClick}
-        className={`message message--${isCurrentUser ? "user" : "friend"}`}
+        className={`message message--${isCurrentUser ? "user" : "friend"} `}
       >
         {isCurrentUser && !message.isDeleted && (
           <MessageDeleteButton

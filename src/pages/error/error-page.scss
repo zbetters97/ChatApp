@@ -6,6 +6,16 @@
   width: 100%;
   text-align: center;
 
+  &--light {
+    .error__header {
+      color: $basic-black;
+    }
+
+    .error__message {
+      color: $basic-black;
+    }
+  }
+
   &__icon {
     @include font(2.5, normal, $basic-red);
   }
@@ -19,7 +29,7 @@
   }
 
   &__button {
-    @include font(1);
+    @include font(1, normal);
     @include flexrow(initial, center, 0.5em);
     margin-top: 1em;
     background-color: $basic-green;
