@@ -1,0 +1,111 @@
+@use "src/styles/abstracts" as *;
+
+.message {
+  @include flexrow(initial, start, 0.5em);
+  position: relative;
+  border-radius: 12px;
+  padding: 0.75em 1em;
+  width: fit-content;
+  max-width: 80%;
+
+  &:hover {
+    .message__delete,
+    .message__like {
+      opacity: 1;
+    }
+  }
+
+  &--clicked {
+    .message__delete,
+    .message__like {
+      opacity: 1;
+    }
+  }
+
+  &--user {
+    margin-left: auto;
+    background-color: darkblue;
+  }
+
+  &--friend {
+    background-color: gray;
+  }
+
+  &__container {
+    @include flexcol(initial, initial, 0.5em);
+  }
+
+  &__button {
+    @include font(0.5);
+    @include badge(0.65, gray, darkslategray, 1.65em);
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  &__delete {
+    top: 50%;
+    left: -10%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 5px $basic-black;
+    color: gray;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__like {
+    top: -0.75em;
+    box-shadow: 0 0 5px $basic-black;
+    background-color: darkslategray;
+    color: gray;
+
+    &--user {
+      left: -0.75em;
+
+      &.message__like--unliked {
+        display: none;
+      }
+    }
+
+    &--friend {
+      right: -0.75em;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    &--liked {
+      opacity: 1;
+      background-color: darkblue;
+      color: red;
+    }
+
+    &--unliked {
+      background-color: darkslategray;
+      color: gray;
+    }
+  }
+
+  &__text {
+    @include font(0.75);
+    width: fit-content;
+    word-break: break-all;
+
+    &--deleted {
+      @include font(initial, normal, gray, italic);
+    }
+  }
+
+  &__time {
+    @include font(0.25, normal, gray);
+    padding: 0 0.5em;
+    width: fit-content;
+
+    &--user {
+      margin-left: auto;
+    }
+  }
+}

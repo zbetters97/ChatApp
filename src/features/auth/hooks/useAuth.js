@@ -35,10 +35,11 @@ export function useAuth() {
       const newUser = userCredentials.user;
 
       const newUserData = {
-        firstname,
-        lastname,
-        displayname,
-        email,
+        firstname: firstname.toLowerCase(),
+        lastname: lastname.toLowerCase(),
+        fullname: `${firstname.toLowerCase()} ${lastname.toLowerCase()}`,
+        displayname: displayname.toLowerCase(),
+        email: email.toLowerCase(),
         createdAt: new Date(),
       };
 
@@ -60,7 +61,10 @@ export function useAuth() {
   async function usernameAvailable(username) {
     try {
       const usersRef = collection(db, "users");
-      const q = query(usersRef, where("username", "==", username));
+      const q = query(
+        usersRef,
+        where("username", "==", username.toLowerCase())
+      );
       const snapshot = await getDocs(q);
 
       return snapshot.empty;
@@ -122,7 +126,10 @@ export function useAuth() {
   async function getUserByUsername(username) {
     try {
       const usersRef = collection(db, "users");
-      const q = query(usersRef, where("username", "==", username));
+      const q = query(
+        usersRef,
+        where("username", "==", username.toLowerCase())
+      );
       const snapshot = await getDocs(q);
 
       if (snapshot.empty) return null;
@@ -143,20 +150,23 @@ export function useAuth() {
     }
   }
 
-  async function searchByUsername(username, currentUserId) {
+  async function searchByName(name, currentUserId) {
     try {
-      const end = username.replace(/.$/, (c) =>
+      if (name.trim() === "") return [];
+
+      name = name.toLowerCase();
+
+      const end = name.replace(/.$/, (c) =>
         String.fromCharCode(c.charCodeAt(0) + 1)
       );
 
       const usersRef = collection(db, "users");
       const q = query(
         usersRef,
-        where("username", ">=", username),
-        where("username", "<", end)
+        where("fullname", ">=", name),
+        where("fullname", "<", end)
       );
       const querySnapshot = await getDocs(q);
-
       if (querySnapshot.empty) return [];
 
       const users = querySnapshot.docs.map((doc) => {
@@ -184,6 +194,6 @@ export function useAuth() {
 
     getUserById,
     getUserByUsername,
-    searchByUsername,
+    searchByName,
   };
 }

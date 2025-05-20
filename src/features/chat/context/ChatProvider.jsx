@@ -7,6 +7,7 @@ import ChatContext from "./ChatContext";
 
 export default function ChatProvder({ children }) {
   const [chats, setChats] = useState(null);
+  const [activeChatId, setActiveChatId] = useState(-1);
   const [activeChatUser, setActiveChatUser] = useState({});
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -44,6 +45,8 @@ export default function ChatProvder({ children }) {
 
   const chatMethods = {
     chats,
+    activeChatId,
+    setActiveChatId,
     activeChatUser,
     setActiveChatUser,
     isCollapsed,

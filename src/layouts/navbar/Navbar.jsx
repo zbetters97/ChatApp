@@ -14,7 +14,14 @@ export default function Navbar({ unreadMessages }) {
           <NotificationBadge unreadCount={unreadMessages} link="/messages" />
         </div>
 
-        {globalUser ? <p>{globalUser.displayname}</p> : <LoginButton />}
+        {globalUser ? (
+          <div>
+            <p>{globalUser.displayname}</p>
+            <LogoutButton />{" "}
+          </div>
+        ) : (
+          <LoginButton />
+        )}
       </nav>
     </header>
   );
@@ -42,5 +49,15 @@ function LoginButton() {
     <Link to="/authenticate" className="navbar__login">
       LOG IN
     </Link>
+  );
+}
+
+function LogoutButton() {
+  const { logout } = useAuthContext();
+
+  return (
+    <button type="button" onClick={logout}>
+      Log out
+    </button>
   );
 }

@@ -1,0 +1,37 @@
+@use "src/styles/abstracts" as *;
+
+.chats {
+  @include flexcol($gap: 0.25em);
+  flex: 2;
+  background-color: darkslategray;
+  padding: 1em 2em;
+  overflow-y: auto;
+
+  &__header {
+    @include font(0.75, bold);
+    @include flexrow(initial, center, 1em);
+    position: relative;
+    border-bottom: 1px solid gray;
+    padding-bottom: 0.25em;
+    text-transform: capitalize;
+  }
+
+  &__messages {
+    @include flexcol($gap: 1em);
+    @include gradient(bottom, $bottom: 99%);
+    flex-grow: 1;
+    padding: 0.5em 1em;
+    max-width: 100%;
+    overflow-y: auto;
+  }
+
+  &__message {
+    @include flexcol($gap: 0.25em);
+  }
+
+  &__date {
+    @include font(0.5, normal, gray);
+    align-self: center;
+    padding: 1.5em 0;
+  }
+}

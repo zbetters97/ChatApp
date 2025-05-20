@@ -1,0 +1,28 @@
+@use "src/styles/abstracts" as *;
+
+.chat-card {
+  @include flexcol($gap: 0.25em);
+  cursor: pointer;
+  padding: 0.5em 0.75em;
+
+  &:hover {
+    background-color: darkgreen;
+  }
+
+  &[aria-selected="true"] {
+    background-color: darkgreen;
+  }
+
+  &__username {
+    @include font(0.75, normal, $basic-white);
+    text-transform: capitalize;
+  }
+
+  &__message {
+    @include font(0.5, normal, $basic-white);
+
+    &--unread {
+      font-weight: bold;
+    }
+  }
+}

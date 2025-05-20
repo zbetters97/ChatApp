@@ -1,0 +1,47 @@
+@use "src/styles/abstracts" as *;
+
+.chat-search {
+  position: relative;
+
+  &__input {
+    @include font(0.75);
+    outline: none;
+    border: 1px solid gray;
+    padding: 0.5em 0.75em;
+    width: 100%;
+
+    &:focus {
+      border-color: $basic-white;
+    }
+  }
+
+  &__users {
+    @include flexcol();
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    background-color: green;
+
+    &[aria-expanded="true"] {
+      height: fit-content;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+  }
+
+  &__user {
+    @include flexrow(initial, center, 0.25em);
+    padding: 0.25em 0.5em;
+    text-align: left;
+
+    &:hover {
+      background-color: darkgreen;
+    }
+  }
+
+  &__name {
+    @include font(0.75, bold);
+    text-transform: capitalize;
+  }
+}

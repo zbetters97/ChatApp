@@ -1,0 +1,32 @@
+@use "src/styles/abstracts" as *;
+
+.chatlist {
+  @include flexcol();
+  position: relative;
+  flex: 1;
+  transition: all 0.2s;
+  border-right: 2px solid $basic-white;
+  background-color: green;
+
+  &__header {
+    @include font(0.5, bold);
+    @include flexrow(space-between, center, 0.5em);
+    padding: 0.75em;
+    overflow: hidden;
+  }
+
+  &__compose {
+    @include font(1);
+    cursor: pointer;
+    color: $basic-white;
+
+    &:hover {
+      color: gray;
+    }
+  }
+
+  &__chats {
+    @include flexcol();
+    overflow-y: auto;
+  }
+}

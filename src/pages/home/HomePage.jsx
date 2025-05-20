@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ChatList from "src/features/chat/components/list/ChatList";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
+import { useChatContext } from "src/features/chat/context/ChatContext";
+import ChatWindow from "src/features/chat/components/sections/ChatWindow";
 import "./home-page.scss";
 
 export default function Home() {
   const { globalUser, loadingUser } = useAuthContext();
+  const { setActiveChatId, setActiveChatUser, setIsCollapsed, readMessage } =
+    useChatContext();
 
-  const [loading, setLoading] = useState(true);
+  const [chatWindowKey, setChatWindowKey] = useState(0);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
-      setLoading(true);
-
       if (loadingUser) {
         return;
       }
@@ -21,16 +24,23 @@ export default function Home() {
       if (!globalUser) {
         navigate("/authenticate");
       }
-
-      setLoading(false);
     };
 
     fetchUser();
   }, [globalUser, loadingUser]);
 
-  if (loading) {
-    return <section>Loading...</section>;
+  async function handleOpenChat(chat) {
+    setActiveChatUser(chat);
+    setActiveChatId(chat.chatId);
+    setChatWindowKey(chat.chatId);
+
+    await readMessage(chat.chatId, globalUser.uid);
   }
 
-  return <section>Home</section>;
+  return (
+    <section className="home">
+      <ChatList handleOpenChat={handleOpenChat} />
+      <ChatWindow key={chatWindowKey} />
+    </section>
+  );
 }

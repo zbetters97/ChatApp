@@ -1,1 +1,9 @@
 @use "src/styles/abstracts" as *;
+
+.home {
+  @include flexrow(initial, stretch);
+  margin: auto;
+  width: 100%;
+  max-width: 1000px;
+  height: 80vh;
+}
