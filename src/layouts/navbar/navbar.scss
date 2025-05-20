@@ -15,7 +15,7 @@
     @include font(1.25);
 
     &:hover {
-      color: gray;
+      color: $lighter-gray;
     }
 
     &[aria-current="page"] {

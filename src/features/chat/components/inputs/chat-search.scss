@@ -6,9 +6,14 @@
   &__input {
     @include font(0.75);
     outline: none;
-    border: 1px solid gray;
+    border: 1px solid $light-gray;
+    background-color: $dark-blue;
     padding: 0.5em 0.75em;
     width: 100%;
+
+    &::placeholder {
+      color: $light-gray;
+    }
 
     &:focus {
       border-color: $basic-white;

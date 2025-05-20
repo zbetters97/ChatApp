@@ -15,16 +15,19 @@
   }
 
   &__message {
-    @include font(1.25, normal, gray);
+    @include font(1.25, normal, $light-gray);
   }
 
   &__button {
     @include font(1);
-    @include flexrow(initial, center, 1em);
+    @include flexrow(initial, center, 0.5em);
     margin-top: 1em;
-    border-radius: 12px;
     background-color: $basic-green;
-    padding: 0.5em 0.75em;
+    padding: 0.5em;
     width: fit-content;
+
+    &:hover {
+      background-color: $darker-green;
+    }
   }
 }

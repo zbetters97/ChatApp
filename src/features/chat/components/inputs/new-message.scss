@@ -3,8 +3,8 @@
 .new-message {
   @include font(0.5);
   @include flexrow(space-between, center, 0.25em);
-  border: 1px solid gray;
-  background-color: #081729;
+  border: 1px solid $light-gray;
+  background-color: $dark-blue;
   padding: 0.75em;
 
   &:focus-within {
@@ -16,19 +16,23 @@
     flex-grow: 1;
     outline: none;
     width: 100%;
+
+    &::placeholder {
+      color: $light-gray;
+    }
   }
 
   &__button {
     @include font(0.75);
     cursor: pointer;
-    color: gray;
+    color: $light-gray;
 
     &:hover {
-      color: $basic-green;
+      color: $lighter-green;
     }
 
     &--active {
-      color: $basic-green;
+      color: $lighter-green;
     }
   }
 }

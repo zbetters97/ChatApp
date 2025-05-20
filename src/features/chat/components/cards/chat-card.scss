@@ -3,14 +3,12 @@
 .chat-card {
   @include flexcol($gap: 0.25em);
   cursor: pointer;
-  padding: 0.5em 0.75em;
-
-  &:hover {
-    background-color: #067511;
-  }
+  padding: 1em;
+  border-radius: 12px;
+  background-color: $basic-gray;
 
   &[aria-selected="true"] {
-    background-color: #067511;
+    background-color: $basic-blue;
   }
 
   &__username {

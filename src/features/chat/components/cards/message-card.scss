@@ -24,12 +24,12 @@
 
   &--user {
     margin-left: auto;
-    background-color: #043ab8;
+    background-color: $basic-blue;
     border-bottom-right-radius: 2px;
   }
 
   &--friend {
-    background-color: #3e404c;
+    background-color: $lighter-gray;
     border-bottom-left-radius: 2px;
   }
 
@@ -39,7 +39,7 @@
 
   &__button {
     @include font(0.5);
-    @include badge(0.65, gray, darkslategray, 1.65em);
+    @include badge(0.65, $light-gray, $darker-gray, 1.65em);
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -50,7 +50,6 @@
     left: -20%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 5px $basic-black;
-    color: gray;
 
     &:hover {
       opacity: 1;
@@ -60,8 +59,6 @@
   &__like {
     top: -0.75em;
     box-shadow: 0 0 5px $basic-black;
-    background-color: darkslategray;
-    color: gray;
 
     &--user {
       left: -0.75em;
@@ -81,13 +78,8 @@
 
     &--liked {
       opacity: 1;
-      background-color: #003e8f;
+      background-color: $basic-blue;
       color: $basic-red;
-    }
-
-    &--unliked {
-      background-color: darkslategray;
-      color: gray;
     }
   }
 
@@ -97,12 +89,12 @@
     word-break: break-all;
 
     &--deleted {
-      @include font(initial, normal, gray, italic);
+      @include font(initial, normal, $basic-white, italic);
     }
   }
 
   &__time {
-    @include font(0.25, normal, gray);
+    @include font(0.25, normal, $light-gray);
     @include padding-x(0.5em);
     width: fit-content;
 

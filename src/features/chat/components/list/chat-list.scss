@@ -5,8 +5,8 @@
   position: relative;
   flex: 1;
   transition: all 0.2s;
-  border-right: 2px solid $basic-white;
-  background-color: #034b0a;
+  background-color: $darker-blue;
+  border-radius: 12px;
 
   &__header {
     @include font(0.5, bold);
@@ -21,12 +21,13 @@
     color: $basic-white;
 
     &:hover {
-      color: gray;
+      color: $light-gray;
     }
   }
 
   &__chats {
-    @include flexcol();
+    @include flexcol(initial, stretch, 2em);
     overflow-y: auto;
+    padding: 1em;
   }
 }

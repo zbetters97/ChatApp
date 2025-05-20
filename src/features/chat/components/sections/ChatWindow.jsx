@@ -89,7 +89,7 @@ function Header() {
 
   return (
     <div className="chats__header">
-      <h2>{activeChatUser.displayname || "Display Name"}</h2>
+      <h2>{activeChatUser.fullname || "Display Name"}</h2>
     </div>
   );
 }

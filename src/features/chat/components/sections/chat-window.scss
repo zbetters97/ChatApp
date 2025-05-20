@@ -3,15 +3,16 @@
 .chats {
   @include flexcol($gap: 0.25em);
   flex: 2;
-  background-color: #0a1d33;
+  background-color: $darker-blue;
   padding: 1em 2em;
   overflow-y: auto;
+  border-radius: 12px;
 
   &__header {
-    @include font(0.75, bold);
+    @include font(0.5, bold);
     @include flexrow(initial, center, 1em);
     position: relative;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid $lighter-gray;
     padding-bottom: 0.25em;
     text-transform: capitalize;
   }
@@ -30,7 +31,7 @@
   }
 
   &__date {
-    @include font(0.5, normal, gray);
+    @include font(0.5, normal, $light-gray);
     @include padding-y(1.5em);
     align-self: center;
   }
