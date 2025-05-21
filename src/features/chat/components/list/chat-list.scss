@@ -9,28 +9,40 @@
 
   &--light {
     background-color: $light-white;
+  }
 
-    .chatlist__header {
+  &--dark {
+    background-color: $darker-blue;
+  }
+
+  &__header {
+    @include font(0.5, bold);
+    @include flexrow(space-between, center, 0.5em);
+    padding: 0.75em;
+    overflow: hidden;
+
+    &--light {
       color: $basic-black;
     }
 
-    .chatlist__compose {
+    &--dark {
+      color: $basic-white;
+    }
+  }
+
+  &__compose {
+    @include font(1);
+    cursor: pointer;
+
+    &--light {
       color: $basic-black;
 
       &:hover {
         color: $lighter-gray;
       }
     }
-  }
 
-  &--dark {
-    background-color: $darker-blue;
-
-    .chatlist__header {
-      color: $basic-white;
-    }
-
-    .chatlist__compose {
+    &--dark {
       color: $basic-white;
 
       &:hover {
@@ -39,20 +51,8 @@
     }
   }
 
-  &__header {
-    @include font(0.5, bold);
-    @include flexrow(space-between, center, 0.5em);
-    padding: 0.75em;
-    overflow: hidden;
-  }
-
-  &__compose {
-    @include font(1);
-    cursor: pointer;
-  }
-
   &__chats {
-    @include flexcol(initial, stretch, 0.5em);
+    @include flexcol(initial, stretch, 1em);
     padding: 1em;
     overflow-y: auto;
   }

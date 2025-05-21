@@ -36,7 +36,7 @@ export default function Layout() {
 
   return (
     <div className={`wrapper wrapper--${theme}`}>
-      <main>
+      <main className={`main main--${theme}`}>
         <Navbar unreadMessages={unreadMessages} />
         <Outlet />
       </main>

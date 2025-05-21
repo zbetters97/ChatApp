@@ -8,19 +8,11 @@
   &--light {
     background-color: $background-light;
     color: $basic-black;
-
-    main {
-      background-color: $dark-white;
-    }
   }
 
   &--dark {
     background-color: $background-dark;
     color: $basic-white;
-
-    main {
-      background-color: $dark-blue;
-    }
   }
 }
 
@@ -33,4 +25,12 @@ main {
   height: 100%;
   max-height: 1000px;
   overflow: auto;
+
+  &--light {
+    background-color: $dark-white;
+  }
+
+  &--dark {
+    background-color: $dark-blue;
+  }
 }

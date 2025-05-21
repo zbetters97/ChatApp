@@ -84,16 +84,6 @@ export default function ChatWindow() {
   );
 }
 
-function Header() {
-  const { activeChatUser } = useChatContext();
-
-  return (
-    <div className="chats__header">
-      <h2>{activeChatUser.fullname || "Display Name"}</h2>
-    </div>
-  );
-}
-
 function Messages({ messages }) {
   const chatRef = useRef(null);
   const prevMessagLength = useRef(messages.length);
@@ -130,6 +120,17 @@ function Messages({ messages }) {
           })}
       </div>
       <NewMessage />
+    </div>
+  );
+}
+
+function Header() {
+  const { activeChatUser } = useChatContext();
+  const { theme } = useThemeContext();
+
+  return (
+    <div className={`chats__header chats__header--${theme}`}>
+      <h2>{activeChatUser.fullname || "Display Name"}</h2>
     </div>
   );
 }

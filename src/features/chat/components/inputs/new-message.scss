@@ -12,6 +12,10 @@
   height: 60px;
   text-transform: capitalize;
 
+  &--light {
+    border: 1px solid $light-gray;
+  }
+
   &__container {
     @include flexrow(space-between, center);
     @include padding-x(1em);
@@ -32,25 +36,15 @@
     }
   }
 
-  &--light {
-    border: 1px solid $light-gray;
-
-    .new-message__input {
-      color: $basic-black;
-    }
-  }
-
-  &--dark {
-    &:focus-within {
-      border-color: $basic-white;
-    }
-  }
-
   &__input {
     @include font(0.75);
     flex-grow: 1;
     outline: none;
     width: 100%;
+
+    &--light {
+      color: $basic-black;
+    }
 
     &--dark {
       color: $basic-white;

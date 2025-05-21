@@ -24,7 +24,7 @@ export default function Navbar({ unreadMessages }) {
 
   return (
     <header className={`nav nav--${theme}`}>
-      <nav className={`navbar navbar--${theme}`}>
+      <nav className="navbar">
         <ThemeToggle />
 
         <NavItem to="/home" icon={faHome} />
@@ -62,6 +62,7 @@ function NavProfile() {
 
 function LogoutButton() {
   const { logout } = useAuthContext();
+  const { theme } = useThemeContext();
 
   const navigate = useNavigate();
 
@@ -71,15 +72,25 @@ function LogoutButton() {
   };
 
   return (
-    <button type="button" onClick={handleClick} className="navbar__link">
+    <button
+      type="button"
+      onClick={handleClick}
+      className={`navbar__link navbar__link--${theme}`}
+    >
       <FontAwesomeIcon icon={faRightFromBracket} />
     </button>
   );
 }
 
 function NavItem({ to, icon }) {
+  const { theme } = useThemeContext();
+
   return (
-    <NavLink to={to} className="navbar__link" aria-current="page">
+    <NavLink
+      to={to}
+      className={`navbar__link navbar__link--${theme}`}
+      aria-current="page"
+    >
       <FontAwesomeIcon icon={icon} />
     </NavLink>
   );

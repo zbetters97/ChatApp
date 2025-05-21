@@ -20,8 +20,15 @@ export default function ErrorPage({ is404 }) {
     <section className={`error error--${theme}`}>
       <FontAwesomeIcon icon={faExclamationTriangle} className="error__icon" />
 
-      <h1 className="error__header">{errorMessage}</h1>
-      {error && <p className="error__message">"{error.message}"</p>}
+      <h1 className={`error__header error__header--${theme}`}>
+        {errorMessage}
+      </h1>
+
+      {error && (
+        <p className={`error__message error__message--${theme}`}>
+          "{error.message}"
+        </p>
+      )}
 
       <Link to="/home" className="error__button">
         <FontAwesomeIcon icon={faHome} />

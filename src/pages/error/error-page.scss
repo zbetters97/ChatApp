@@ -6,26 +6,24 @@
   width: 100%;
   text-align: center;
 
-  &--light {
-    .error__header {
-      color: $basic-black;
-    }
-
-    .error__message {
-      color: $basic-black;
-    }
-  }
-
   &__icon {
     @include font(2.5, normal, $basic-red);
   }
 
   &__header {
     @include font(1.5, bold);
+
+    &--light {
+      color: $basic-black;
+    }
   }
 
   &__message {
     @include font(1.25, normal, $light-gray);
+
+    &--light {
+      color: $basic-black;
+    }
   }
 
   &__button {

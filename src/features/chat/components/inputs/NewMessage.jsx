@@ -48,6 +48,8 @@ export default function MessageInput() {
 }
 
 function FormInput({ inputRef, setActive }) {
+  const { theme } = useThemeContext();
+
   const handleChange = (e) => {
     setActive(e.target.value.trim() !== "");
   };
@@ -58,7 +60,7 @@ function FormInput({ inputRef, setActive }) {
       onChange={handleChange}
       ref={inputRef}
       placeholder="Send a message..."
-      className="new-message__input"
+      className={`new-message__input new-message__input--${theme}`}
       aria-label="type a message"
     />
   );

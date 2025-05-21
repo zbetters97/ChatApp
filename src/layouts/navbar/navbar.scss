@@ -18,27 +18,27 @@
   height: 100%;
   position: relative;
 
-  &--light &__link {
-    color: $light-gray;
-
-    &:hover {
-      color: $lighter-green;
-    }
-  }
-
-  &--dark &__link {
-    color: $basic-white;
-
-    &:hover {
-      color: $lighter-green;
-    }
-  }
-
   &__link {
     @include font(1.25);
 
     &[aria-current="page"] {
       color: $lighter-green;
+    }
+
+    &--light {
+      color: $light-gray;
+
+      &:hover {
+        color: $lighter-green;
+      }
+    }
+
+    &--dark {
+      color: $basic-white;
+
+      &:hover {
+        color: $lighter-green;
+      }
     }
   }
 

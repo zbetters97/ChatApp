@@ -2,31 +2,33 @@
 
 .chat-search {
   position: relative;
-
-  &--light &__input {
-    border-color: transparent;
-    background-color: $dark-white;
-    color: $basic-black;
-  }
-
-  &--dark &__input {
-    background-color: $dark-blue;
-    color: $basic-white;
-
-    &:focus-within {
-      border-color: $basic-white;
-    }
-  }
+  padding: 1em;
 
   &__input {
     @include font(0.75);
     outline: none;
     border: 1px solid $light-gray;
+    border-radius: 12px;
     padding: 0.5em 0.75em;
     width: 100%;
 
     &::placeholder {
       color: $light-gray;
+    }
+
+    &--light {
+      border-color: transparent;
+      background-color: $dark-white;
+      color: $basic-black;
+    }
+
+    &--dark {
+      background-color: $dark-blue;
+      color: $basic-white;
+
+      &:focus-within {
+        border-color: $basic-white;
+      }
     }
   }
 

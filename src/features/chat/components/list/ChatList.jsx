@@ -18,8 +18,10 @@ export default function ChatList({ handleOpenChat }) {
 }
 
 function Header() {
+  const { theme } = useThemeContext();
+
   return (
-    <div className="chatlist__header">
+    <div className={`chatlist__header chatlist__header--${theme}`}>
       <h2>All chats</h2>
       <Compose />
     </div>
@@ -30,6 +32,7 @@ function Compose() {
   const { globalUser } = useAuthContext();
   const { setActiveChatId, activeChatUser, setActiveChatUser } =
     useChatContext();
+  const { theme } = useThemeContext();
 
   async function handleNewChat() {
     if (!activeChatUser || !globalUser) return;
@@ -38,7 +41,11 @@ function Compose() {
   }
 
   return (
-    <button type="button" onClick={handleNewChat} className="chatlist__compose">
+    <button
+      type="button"
+      onClick={handleNewChat}
+      className={`chatlist__compose chatlist__compose--${theme}`}
+    >
       <FontAwesomeIcon icon={faPenToSquare} />
     </button>
   );

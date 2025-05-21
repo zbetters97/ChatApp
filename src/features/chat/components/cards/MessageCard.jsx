@@ -27,7 +27,7 @@ export default function MessageCard({ message }) {
         onClick={handleClick}
         className={`message message--${theme} message--${
           isCurrentUser ? "user" : "friend"
-        } `}
+        }`}
       >
         {isCurrentUser && !message.isDeleted && (
           <MessageDeleteButton

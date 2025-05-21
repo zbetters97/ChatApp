@@ -5,13 +5,11 @@ import { useChatContext } from "../../context/ChatContext";
 import "./chat-search.scss";
 
 export default function ChatSearch() {
-  const { theme } = useThemeContext();
-
   const [users, setUsers] = useState([]);
   const inputRef = useRef(null);
 
   return (
-    <div className={`chat-search chat-search--${theme}`}>
+    <div className="chat-search">
       <SearchInput inputRef={inputRef} setUsers={setUsers} />
       <SearchResults users={users} setUsers={setUsers} inputRef={inputRef} />
     </div>
@@ -20,6 +18,7 @@ export default function ChatSearch() {
 
 function SearchInput({ inputRef, setUsers }) {
   const { globalUser, searchByName } = useAuthContext();
+  const { theme } = useThemeContext();
 
   const handleSearch = async (e) => {
     if (e.target.value.trim() === "") {
@@ -38,7 +37,7 @@ function SearchInput({ inputRef, setUsers }) {
       ref={inputRef}
       onChange={handleSearch}
       placeholder="Search for a user..."
-      className="chat-search__input"
+      className={`chat-search__input chat-search__input--${theme}`}
       aria-label="search for a user"
     />
   );
