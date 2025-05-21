@@ -2,6 +2,7 @@ $background-light: #e0e0e0;
 $background-dark: #121212;
 
 $light-white: #f5f5f5;
+$light-white-transparent: rgba(245, 245, 245, 0.5);
 $light-gray: #8f8fa3;
 
 $lighter-gray: #5c5c70;
@@ -20,6 +21,12 @@ $dark-white: #cccccc;
 $darker-gray: #373743;
 $darker-green: #034b0a;
 $darker-blue: #0a1d33;
+$darker-blue-transparent: rgba(10, 29, 51, 0.5);
 
 $dark-gray: #2e2e38;
 $dark-blue: #081729;
+
+$icon-sun: #fdc30d;
+$icon-sun-bg: #feeaae;
+$icon-moon: #f5f5f5;
+$icon-moon-bg: #113546;

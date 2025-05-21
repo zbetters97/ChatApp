@@ -28,11 +28,11 @@
     height: 80px;
 
     &--light {
-      background-color: rgba(245, 245, 245, 0.5);
+      background-color: $light-white-transparent;
     }
 
     &--dark {
-      background-color: rgba(10, 29, 51, 0.5);
+      background-color: $darker-blue-transparent;
     }
   }
 
@@ -56,15 +56,15 @@
   }
 
   &__button {
-    @include badge(0.65, $light-gray, $lighter-blue, 2em);
+    @include badge(0.65, $basic-white, $lighter-blue, 2em);
+    opacity: 0;
+    transition: all 0.2s;
     cursor: pointer;
-
-    &:hover {
-      color: $basic-white;
-    }
+    pointer-events: none;
 
     &--active {
-      color: $basic-white;
+      opacity: 1;
+      pointer-events: all;
     }
   }
 }

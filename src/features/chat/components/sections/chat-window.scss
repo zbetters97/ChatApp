@@ -31,12 +31,12 @@
 
     &--light {
       border-color: $basic-gray;
-      background-color: rgba(245, 245, 245, 0.5);
+      background-color: $light-white-transparent;
       color: $basic-black;
     }
 
     &--dark {
-      background-color: rgba(10, 29, 51, 0.7);
+      background-color: $darker-blue-transparent;
       color: $basic-white;
     }
   }

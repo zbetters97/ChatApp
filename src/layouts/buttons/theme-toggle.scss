@@ -1,56 +1,54 @@
 @use "src/styles/abstracts" as *;
 
 .theme-toggle {
-  display: inline-block;
-  position: relative;
-  width: 50px;
-  height: 26px;
+  width: 65px;
 
-  &__wrapper {
+  &__input {
+    display: none;
+
+    &:checked {
+      & + .theme-toggle__label {
+        background-color: $icon-moon-bg;
+      }
+
+      & ~ .theme-toggle__label {
+        & > .theme-toggle__sun {
+          transform: translateX(0px);
+          opacity: 0;
+        }
+
+        & > .theme-toggle__moon {
+          transform: translateX(-35px);
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__label {
     @include flexrow(center, center, 0.5em);
     position: absolute;
     top: 0;
-  }
-
-  &__icon {
-    @include font(0.75, normal, $light-gray);
-  }
-
-  &__input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-
-    &:checked + .theme-toggle__slider {
-      background-color: $basic-green;
-    }
-
-    &:checked + .theme-toggle__slider:before {
-      transform: translateX(22px);
-    }
-  }
-
-  &__slider {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    transition: 0.2s;
     cursor: pointer;
-    border-radius: 20px;
-    background-color: $darker-gray;
+    border-radius: 30px;
+    background-color: $icon-sun-bg;
+    padding: 10px;
+    width: 100%;
+    height: 31px;
+  }
 
-    &:before {
-      position: absolute;
-      bottom: 4px;
-      left: 4px;
-      transition: 0.2s;
-      border-radius: 50%;
-      background-color: $basic-white;
-      width: 18px;
-      height: 18px;
-      content: "";
-    }
+  &__sun {
+    transform: translateX(30px);
+    transition: 0.3s;
+    color: $icon-sun;
+    font-size: 25px;
+  }
+
+  &__moon {
+    transform: translateX(0px);
+    opacity: 0;
+    transition: 0.3s;
+    color: $icon-moon;
+    font-size: 25px;
   }
 }

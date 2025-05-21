@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import "./theme-toggle.scss";
 
 export default function ThemeToggle() {
@@ -13,19 +13,17 @@ export default function ThemeToggle() {
   };
 
   return (
-    <div className="theme-toggle__wrapper">
-      <FontAwesomeIcon
-        icon={enabled ? faMoon : faSun}
-        className="theme-toggle__icon"
+    <div className="theme-toggle">
+      <input
+        type="checkbox"
+        id="switch-button"
+        onChange={handleToggle}
+        checked={enabled}
+        className="theme-toggle__input"
       />
-      <label className="theme-toggle">
-        <input
-          type="checkbox"
-          onChange={handleToggle}
-          checked={enabled}
-          className="theme-toggle__input"
-        />
-        <span className="theme-toggle__slider"></span>
+      <label htmlFor="switch-button" className="theme-toggle__label">
+        <FontAwesomeIcon icon={faSun} className="theme-toggle__sun" />
+        <FontAwesomeIcon icon={faMoon} className="theme-toggle__moon" />
       </label>
     </div>
   );
