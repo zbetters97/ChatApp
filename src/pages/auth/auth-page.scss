@@ -30,11 +30,11 @@
   }
 
   &__label {
-    @include font(1);
+    @include font(0.75);
   }
 
   &__input {
-    @include font(1);
+    @include font(0.75);
     outline: none;
     border: 2px solid $basic-white;
     padding: 0.15em 0.25em;
@@ -52,6 +52,10 @@
   &__reset {
     @include font(0.75);
     @include flexrow(center, center, 0.5em);
+  }
+
+  &__highlight {
+    @include font(0.75, bold, $basic-green);
   }
 
   &__back {

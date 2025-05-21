@@ -7,7 +7,6 @@ export default function ChatCard({ chat, handleOpenChat }) {
   const { theme } = useThemeContext();
 
   const isActive = activeChatUser.uid === chat.uid;
-  const color = chat.unread > 0 ? "unread" : "read";
 
   const lastMessage =
     chat.lastMessage.length > 40
@@ -21,9 +20,8 @@ export default function ChatCard({ chat, handleOpenChat }) {
       className={`chat-card chat-card--${theme}`}
     >
       <p className="chat-card__username">{chat.displayname}</p>
-      <p className={`chat-card__message chat-card__message--${color} `}>
-        {lastMessage}
-      </p>
+      <p className="chat-card__message">{lastMessage}</p>
+      {chat.unread > 0 && <span className={`chat-card__unread`} />}
     </div>
   );
 }

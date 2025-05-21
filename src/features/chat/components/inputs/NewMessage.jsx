@@ -35,13 +35,15 @@ export default function MessageInput() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={`new-message new-message--${theme}`}
-    >
-      <FormInput inputRef={inputRef} setActive={setActive} />
-      <SubmitButton active={active} />
-    </form>
+    <div className={`new-message__container new-message__container--${theme}`}>
+      <form
+        onSubmit={handleSubmit}
+        className={`new-message new-message--${theme}`}
+      >
+        <FormInput inputRef={inputRef} setActive={setActive} />
+        <SubmitButton active={active} />
+      </form>
+    </div>
   );
 }
 

@@ -1,17 +1,19 @@
 @use "src/styles/abstracts" as *;
 
 .chats {
-  @include flexcol($gap: 0.25em);
+  @include flexcol();
+  position: relative;
   flex: 2;
   border-radius: 12px;
   padding: 1em 2em;
-  overflow-y: auto;
+  height: 100%;
 
   &--light {
     background-color: $light-white;
 
     .chats__header {
       border-color: $basic-gray;
+      background-color: rgba(245, 245, 245, 0.5);
       color: $basic-black;
     }
 
@@ -24,6 +26,7 @@
     background-color: $darker-blue;
 
     .chats__header {
+      background-color: rgba(10, 29, 51, 0.5);
       color: $basic-white;
     }
 
@@ -36,16 +39,20 @@
     @include font(0.5, bold);
     @include flexrow(initial, center, 1em);
     position: relative;
-    border-bottom: 1px solid $lighter-gray;
-    padding-bottom: 0.25em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-grow: 1;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+    padding: 1em;
+    width: 100%;
     text-transform: capitalize;
   }
 
   &__messages {
     @include flexcol($gap: 1em);
-    @include gradient(bottom, $bottom: 99%);
-    flex-grow: 1;
-    padding: 0.5em 1em;
+    padding: 1em 1em 3em 1em;
     max-width: 100%;
     overflow-y: auto;
   }
@@ -55,7 +62,7 @@
   }
 
   &__date {
-    @include font(0.5, normal);
+    @include font(0.5, bold);
     @include padding-y(1.5em);
     align-self: center;
   }

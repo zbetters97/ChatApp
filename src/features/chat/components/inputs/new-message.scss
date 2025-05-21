@@ -3,12 +3,32 @@
 .new-message {
   @include font(0.5);
   @include flexrow(space-between, center, 0.25em);
+  flex-grow: 1;
   border: 1px solid $light-gray;
-  padding: 0.75em;
+  border-radius: 20px;
+  padding: 0.5em 1em;
+  width: 100%;
+
+  &__container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    backdrop-filter: blur(10px);
+    padding: 0.75em 1em;
+    width: 100%;
+
+    &--light {
+      background-color: rgba(245, 245, 245, 0.5);
+    }
+
+    &--dark {
+      background-color: rgba(10, 29, 51, 0.5);
+    }
+  }
 
   &--light {
-    border-color: transparent;
-    background-color: $dark-white;
+    border: 1px solid $light-gray;
 
     .new-message__input {
       color: $basic-black;
@@ -16,8 +36,6 @@
   }
 
   &--dark {
-    background-color: $dark-blue;
-
     &:focus-within {
       border-color: $basic-white;
     }

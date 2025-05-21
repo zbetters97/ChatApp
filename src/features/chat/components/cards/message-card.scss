@@ -1,12 +1,57 @@
 @use "src/styles/abstracts" as *;
 
 .message {
-  @include flexrow(initial, start, 0.5em);
+  display: inline-block;
   position: relative;
   border-radius: 20px;
-  padding: 0.75em;
+  padding: 8px 15px;
   width: fit-content;
   max-width: 80%;
+
+  &:before {
+    position: absolute;
+    bottom: 0;
+    z-index: 0;
+    width: 20px;
+    height: 15px;
+    content: "";
+  }
+  &:after {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    width: 10px;
+    height: 20px;
+    content: "";
+  }
+
+  &--light {
+    &:after {
+      background: $basic-white;
+    }
+
+    &.message--friend {
+      background: $lighter-gray;
+
+      &:before {
+        background: $lighter-gray;
+      }
+    }
+  }
+
+  &--dark {
+    &:after {
+      background: $darker-blue;
+    }
+
+    &.message--friend {
+      background: $basic-gray;
+
+      &:before {
+        background: $basic-gray;
+      }
+    }
+  }
 
   &:hover {
     .message__delete,
@@ -25,16 +70,31 @@
   &--user {
     margin-left: auto;
     background-color: $basic-blue;
-    border-bottom-right-radius: 2px;
+
+    &:before {
+      right: -8px;
+      border-bottom-left-radius: 15px;
+      background-color: $basic-blue;
+    }
+    &:after {
+      right: -10px;
+      border-bottom-left-radius: 10px;
+    }
   }
 
   &--friend {
-    border-bottom-left-radius: 2px;
-    background-color: $lighter-gray;
+    &:before {
+      left: -7px;
+      border-bottom-right-radius: 15px;
+    }
+    &:after {
+      left: -10px;
+      border-bottom-right-radius: 10px;
+    }
   }
 
   &__container {
-    @include flexcol(initial, initial, 0.5em);
+    @include flexcol(initial, initial, 0.25em);
   }
 
   &__button {

@@ -2,9 +2,10 @@
 
 .chat-card {
   @include flexcol($gap: 0.25em);
+  position: relative;
   cursor: pointer;
-  padding: 1em;
   border-radius: 12px;
+  padding: 1em;
 
   &--light {
     background-color: $light-gray;
@@ -25,9 +26,16 @@
 
   &__message {
     @include font(0.5, normal, $basic-white);
+  }
 
-    &--unread {
-      font-weight: bold;
-    }
+  &__unread {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translate(50%, -50%);
+    border-radius: 50%;
+    background-color: $lighter-blue;
+    width: 20px;
+    height: 20px;
   }
 }
