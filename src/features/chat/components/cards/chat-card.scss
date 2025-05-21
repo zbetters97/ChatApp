@@ -1,7 +1,7 @@
 @use "src/styles/abstracts" as *;
 
 .chat-card {
-  @include flexcol($gap: 0.25em);
+  @include flexrow(initial, center, 1em);
   position: relative;
   cursor: pointer;
   border-radius: 20px;
@@ -17,6 +17,14 @@
 
   &[aria-selected="true"] {
     background-color: $basic-blue;
+  }
+
+  &__icon {
+    @include font(2.5, normal, $basic-white);
+  }
+
+  &__info {
+    @include flexcol(initial, flex-start, 0.25em);
   }
 
   &__username {

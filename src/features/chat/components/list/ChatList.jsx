@@ -1,8 +1,13 @@
+import { useNavigate } from "react-router-dom";
+import ThemeToggle from "src/layouts/buttons/ThemeToggle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useChatContext } from "src/features/chat/context/ChatContext";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
 import { useThemeContext } from "src/features/theme/context/ThemeContext";
+import {
+  faArrowRightFromBracket,
+  faPenToSquare,
+} from "@fortawesome/free-solid-svg-icons";
 import ChatCard from "../cards/ChatCard";
 import "./chat-list.scss";
 
@@ -11,8 +16,10 @@ export default function ChatList({ handleOpenChat }) {
 
   return (
     <section className={`chatlist chatlist--${theme}`}>
+      <ThemeToggle />
       <Header />
       <Chats handleOpenChat={handleOpenChat} />
+      <Footer />
     </section>
   );
 }
@@ -67,6 +74,33 @@ function Chats({ handleOpenChat }) {
             />
           );
         })}
+    </div>
+  );
+}
+
+function Footer() {
+  const { loadingUser, globalUser, logout } = useAuthContext();
+  const { theme } = useThemeContext();
+
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/auth");
+  };
+
+  return (
+    <div className={`chatlist__footer chatlist__footer--${theme}`}>
+      <p className={`chatlist__current-user chatlist__current-user--${theme}`}>
+        {globalUser.fullname}
+      </p>
+      <button
+        type="button"
+        onClick={handleLogout}
+        className={`chatlist__logout chatlist__logout--${theme}`}
+      >
+        <FontAwesomeIcon icon={faArrowRightFromBracket} />
+      </button>
     </div>
   );
 }

@@ -2,6 +2,7 @@
 
 .theme-toggle {
   width: 65px;
+  padding: 0.5em 1em;
 
   &__input {
     display: none;
@@ -27,13 +28,11 @@
 
   &__label {
     @include flexrow(center, center, 0.5em);
-    position: absolute;
-    top: 0;
     cursor: pointer;
     border-radius: 30px;
     background-color: $icon-sun-bg;
     padding: 10px;
-    width: 100%;
+    width: fit-content;
     height: 31px;
   }
 

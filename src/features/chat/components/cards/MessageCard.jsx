@@ -4,6 +4,7 @@ import { useAuthContext } from "src/features/auth/context/AuthContext";
 import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import { useChatContext } from "../../context/ChatContext";
 import "./message-card.scss";
+import { formatTime } from "src/utils/date";
 
 export default function MessageCard({ message }) {
   const { globalUser } = useAuthContext();
@@ -22,7 +23,12 @@ export default function MessageCard({ message }) {
   }
 
   return (
-    <div className="message__container">
+    <div
+      className={`message__container message__container--${
+        isCurrentUser ? "user" : "friend"
+      }`}
+    >
+      <MessageTime message={message} />
       <div
         onClick={handleClick}
         className={`message message--${theme} message--${
@@ -42,8 +48,6 @@ export default function MessageCard({ message }) {
 
         <MessageContent message={message} />
       </div>
-
-      <MessageTime message={message} isCurrentUser={isCurrentUser} />
     </div>
   );
 }
@@ -108,17 +112,8 @@ function MessageContent({ message }) {
   return <p className="message__text">{message.text}</p>;
 }
 
-function MessageTime({ message, isCurrentUser }) {
+function MessageTime({ message }) {
   return (
-    <p
-      className={`message__time message__time--${
-        isCurrentUser ? "user" : "friend"
-      }`}
-    >
-      {message.createdAt.toDate().toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-      })}
-    </p>
+    <p className="message__time">{formatTime(message.createdAt.toDate())}</p>
   );
 }

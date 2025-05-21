@@ -49,6 +49,10 @@ export default function ChatPage() {
     await readMessage(chat.chatId, globalUser.uid);
   }
 
+  if (!globalUser) {
+    return null;
+  }
+
   return (
     <section className="chat">
       <ChatList handleOpenChat={handleOpenChat} />

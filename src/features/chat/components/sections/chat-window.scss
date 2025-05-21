@@ -42,9 +42,9 @@
   }
 
   &__messages {
-    @include padding-x(2em);
-    @include flexcol($gap: 1em);
-    margin-bottom: 80px;
+    @include padding-x(1em);
+    @include flexcol($gap: 1.5em);
+    margin-bottom: 90px;
     max-width: 100%;
 
     &--wrapper {

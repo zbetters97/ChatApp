@@ -92,7 +92,11 @@
   }
 
   &__container {
-    @include flexcol(initial, initial, 0.25em);
+    @include flexrow(initial, center, 0.25em);
+
+    &--user {
+      flex-direction: row-reverse;
+    }
   }
 
   &__button {
@@ -105,9 +109,9 @@
 
   &__delete {
     top: 50%;
-    left: -25px;
+    left: -30px;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 5px $basic-black;
+    box-shadow: 0 0 2px $basic-black;
 
     &:hover {
       opacity: 1;
@@ -116,7 +120,7 @@
 
   &__like {
     top: -18px;
-    box-shadow: 0 0 5px $basic-black;
+    box-shadow: 0 0 2px $basic-black;
 
     &--user {
       left: -15px;
@@ -155,9 +159,5 @@
     @include font(0.25, normal, $light-gray);
     @include padding-x(0.5em);
     width: fit-content;
-
-    &--user {
-      margin-left: auto;
-    }
   }
 }
