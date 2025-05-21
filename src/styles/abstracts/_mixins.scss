@@ -52,11 +52,10 @@
 @mixin badge($font-size, $color, $bg-color, $size) {
   @include font($font-size, bold, $color);
   @include flexrow(center, center);
-  border-radius: 50%;
-  background-color: $bg-color;
   width: $size;
   height: $size;
-  text-align: center;
+  border-radius: 50%;
+  background-color: $bg-color;
 }
 
 @mixin gradient($direction: top, $top: 5%, $bottom: 95%) {

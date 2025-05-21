@@ -99,7 +99,7 @@
 
   &__button {
     @include font(0.5);
-    @include badge(0.65, $light-gray, $darker-gray, 1.65em);
+    @include badge(0.65, $light-gray, $darker-gray, 1.5em);
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -107,7 +107,7 @@
 
   &__delete {
     top: 50%;
-    left: -20%;
+    left: -25px;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 5px $basic-black;
 
@@ -117,11 +117,11 @@
   }
 
   &__like {
-    top: -0.75em;
+    top: -18px;
     box-shadow: 0 0 5px $basic-black;
 
     &--user {
-      left: -0.75em;
+      left: -15px;
 
       &.message__like--unliked {
         display: none;
@@ -129,7 +129,7 @@
     }
 
     &--friend {
-      right: -0.75em;
+      right: -15px;
 
       &:hover {
         opacity: 1;

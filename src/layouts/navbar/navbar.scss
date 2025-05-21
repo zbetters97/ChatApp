@@ -42,6 +42,17 @@
     }
   }
 
+  &__messages {
+    position: relative;
+  }
+
+  &__badge {
+    @include badge(0.5, $basic-white, $basic-red, 1.25em);
+    position: absolute;
+    top: -8px;
+    right: -12px;
+  }
+
   &__toggle {
     position: absolute;
     top: 0;

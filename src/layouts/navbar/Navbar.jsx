@@ -46,7 +46,7 @@ function NotificationBadge({ unreadCount, link }) {
   if (!unreadCount || unreadCount === 0) return;
   return (
     <NavLink to={link}>
-      <p className="navbar__badge">{unreadCount}</p>
+      <div className="navbar__badge">{unreadCount}</div>
     </NavLink>
   );
 }

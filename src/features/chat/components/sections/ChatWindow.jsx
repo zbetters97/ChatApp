@@ -79,9 +79,7 @@ export default function ChatWindow() {
 
   return (
     <section className={`chats chats--${theme}`}>
-      <Header />
       <Messages messages={messages} />
-      <NewMessage />
     </section>
   );
 }
@@ -113,20 +111,25 @@ function Messages({ messages }) {
   }, [messages]);
 
   return (
-    <div ref={chatRef} className="chats__messages">
-      {messages &&
-        messages.map((message, index) => {
-          return (
-            <div key={message.id} className="chats__message">
-              <MessageDate
-                message={message}
-                index={index}
-                messages={messages}
-              />
-              <MessageCard message={message} />
-            </div>
-          );
-        })}
+    <div ref={chatRef} className="chats__messages--wrapper">
+      <Header />
+
+      <div className="chats__messages">
+        {messages &&
+          messages.map((message, index) => {
+            return (
+              <div key={message.id} className="chats__message">
+                <MessageDate
+                  message={message}
+                  index={index}
+                  messages={messages}
+                />
+                <MessageCard message={message} />
+              </div>
+            );
+          })}
+      </div>
+      <NewMessage />
     </div>
   );
 }
