@@ -5,11 +5,13 @@ import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import "./back-button.scss";
 
 export default function BackButton() {
-  const { setIsCollapsed, setActiveChatId } = useChatContext();
+  const { setIsCollapsed, setActiveChatId, setActiveChatUser } =
+    useChatContext();
   const { theme } = useThemeContext();
 
   const handleCollapse = () => {
     setActiveChatId(-1);
+    setActiveChatUser({});
     setIsCollapsed(false);
   };
 
