@@ -2,13 +2,14 @@
 
 .message {
   @include flexrow(initial, center, 0.5em);
+  transition: padding 0.2s;
 
   &--user {
     flex-direction: row-reverse;
   }
 
   &--liked {
-    padding-top: 1em;
+    padding-top: 1.25em;
   }
 
   &__time {
@@ -22,6 +23,10 @@
 
     &--light {
       color: $light-gray;
+    }
+
+    &--dark {
+      color: $lighter-gray;
     }
   }
 }
@@ -95,10 +100,10 @@
     }
 
     &.bubble--light {
-      background: $lighter-gray;
+      background: $light-gray;
 
       &:before {
-        background: $lighter-gray;
+        background: $light-gray;
       }
     }
 
@@ -148,7 +153,7 @@
       }
 
       &.bubble__like--light {
-        background-color: $lighter-gray;
+        background-color: $light-gray;
       }
 
       &.bubble__like--dark {
