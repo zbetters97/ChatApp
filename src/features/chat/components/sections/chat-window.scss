@@ -92,7 +92,7 @@
     }
 
     &__messages {
-      @include padding-x(0.15em);
+      @include padding-x(1em);
       gap: 1.25em;
       margin-bottom: 0px;
       height: 100%;

@@ -22,12 +22,19 @@
   width: fit-content;
   max-width: 80%;
 
+  &:hover {
+    .bubble__delete,
+    .bubble__like {
+      opacity: 1;
+    }
+  }
+
   &:before {
     position: absolute;
     bottom: 0;
     z-index: 0;
     width: 20px;
-    height: 15px;
+    height: 20px;
     content: "";
   }
 
@@ -46,20 +53,6 @@
 
   &--dark:after {
     background: $darker-blue;
-  }
-
-  &:hover {
-    .bubble__delete,
-    .bubble__like {
-      opacity: 1;
-    }
-  }
-
-  &--clicked {
-    .bubble__delete,
-    .bubble__like {
-      opacity: 1;
-    }
   }
 
   &--user {
@@ -103,6 +96,13 @@
       &:before {
         background: $basic-gray;
       }
+    }
+  }
+
+  &--clicked {
+    .bubble__delete,
+    .bubble__like {
+      opacity: 1;
     }
   }
 
@@ -168,12 +168,17 @@
     gap: 0.15em;
 
     &__time {
+      display: none;
       font-size: 0.75rem;
     }
   }
 
   .bubble {
-    max-width: 70%;
+    max-width: 90%;
+
+    &:before {
+      width: 23px;
+    }
 
     &--clicked {
       .bubble__delete,
@@ -212,7 +217,7 @@
     }
 
     &__text {
-      font-size: 1rem;
+      font-size: 1.5rem;
     }
   }
 }
