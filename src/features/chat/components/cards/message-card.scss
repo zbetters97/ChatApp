@@ -16,6 +16,14 @@
     @include padding-x(0.5em);
     width: fit-content;
   }
+
+  &__deleted {
+    @include font(0.5, bold, $lighter-gray, italic);
+
+    &--light {
+      color: $light-gray;
+    }
+  }
 }
 
 .bubble {
@@ -112,7 +120,7 @@
 
   &__button {
     @include font(0.5);
-    @include badge(0.65, $light-gray, $darker-gray, 1.75em);
+    @include badge(0.65, $light-gray, $basic-gray, 1.65em);
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -120,9 +128,8 @@
 
   &__delete {
     top: 50%;
-    left: -35px;
+    left: -27px;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 2px $basic-black;
 
     &:hover {
       opacity: 1;
@@ -130,19 +137,27 @@
   }
 
   &__like {
-    top: -20px;
-    box-shadow: 0 0 5px $basic-black;
+    top: -15px;
+    background-color: $basic-blue;
 
     &--user {
-      left: -22px;
+      left: -16px;
 
       &.bubble__like--unliked {
         display: none;
       }
+
+      &.bubble__like--light {
+        background-color: $lighter-gray;
+      }
+
+      &.bubble__like--dark {
+        background-color: $basic-gray;
+      }
     }
 
     &--friend {
-      right: -22px;
+      right: -16px;
 
       &:hover {
         opacity: 1;
@@ -151,8 +166,7 @@
 
     &--liked {
       opacity: 1;
-      background-color: $basic-blue;
-      color: $basic-red;
+      color: $lighter-red;
     }
   }
 
@@ -175,6 +189,11 @@
       display: none;
       font-size: 0.75rem;
     }
+
+    &__deleted {
+      @include padding-y(0.5em);
+      font-size: 1rem;
+    }
   }
 
   .bubble {
@@ -192,19 +211,19 @@
     }
 
     &__button {
-      font-size: 1.5rem;
+      font-size: 1.35rem;
     }
 
     &__delete {
       display: none;
-      left: -40px;
+      left: -35px;
     }
 
     &__like {
-      top: -25px;
+      top: -20px;
 
       &--user {
-        left: -25px;
+        left: -22px;
 
         &.bubble__like--unliked {
           display: none;
@@ -212,7 +231,7 @@
       }
 
       &--friend {
-        right: -25px;
+        right: -22px;
       }
 
       &--unliked {

@@ -101,7 +101,7 @@ function Messages({ messages }) {
     if (messages.length < 3) return;
 
     // Scroll to bottom if new message comes in
-    if (prevMessagLength.current.length >= messages.length) return;
+    if (prevMessagLength.current >= messages.length) return;
 
     // Scroll to bottom for mobile and desktop
     if (window.innerWidth <= MOBILE_WIDTH) {

@@ -29,25 +29,35 @@ export default function MessageCard({ message }) {
       } message--${message.isLiked ? "liked" : "unliked"} `}
     >
       <MessageTime message={message} />
-      <div
-        onClick={handleClick}
-        className={`bubble bubble--${theme} bubble--${
-          isCurrentUser ? "user" : "friend"
-        }`}
-      >
-        {isCurrentUser && !message.isDeleted && (
-          <MessageDeleteButton
-            message={message}
-            isCurrentUser={isCurrentUser}
-          />
-        )}
 
-        {!message.isDeleted && (
-          <MessageLikeButton message={message} isCurrentUser={isCurrentUser} />
-        )}
+      {message.isDeleted ? (
+        <p className={`message__deleted message__deleted--${theme}`}>
+          This message was deleted
+        </p>
+      ) : (
+        <div
+          onClick={handleClick}
+          className={`bubble bubble--${theme} bubble--${
+            isCurrentUser ? "user" : "friend"
+          }`}
+        >
+          {isCurrentUser && !message.isDeleted && (
+            <MessageDeleteButton
+              message={message}
+              isCurrentUser={isCurrentUser}
+            />
+          )}
 
-        <MessageContent message={message} />
-      </div>
+          {!message.isDeleted && (
+            <MessageLikeButton
+              message={message}
+              isCurrentUser={isCurrentUser}
+            />
+          )}
+
+          <MessageText message={message} />
+        </div>
+      )}
     </div>
   );
 }
@@ -87,8 +97,9 @@ function MessageDeleteButton({ message, isCurrentUser }) {
 
 function MessageLikeButton({ message, isCurrentUser }) {
   const { likeMessage } = useChatContext();
+  const { theme } = useThemeContext();
 
-  const color = message.isLiked ? "liked" : "unliked";
+  const isLiked = message.isLiked ? "liked" : "unliked";
   const position = isCurrentUser ? "user" : "friend";
 
   async function handleLike() {
@@ -100,7 +111,7 @@ function MessageLikeButton({ message, isCurrentUser }) {
     <button
       type="button"
       onClick={handleLike}
-      className={`bubble__button bubble__like bubble__like--${color} bubble__like--${position}`}
+      className={`bubble__button bubble__like bubble__like--${theme} bubble__like--${isLiked} bubble__like--${position}`}
       aria-label="like message"
     >
       <FontAwesomeIcon icon={faHeart} />
@@ -108,10 +119,6 @@ function MessageLikeButton({ message, isCurrentUser }) {
   );
 }
 
-function MessageContent({ message }) {
-  if (message.isDeleted) {
-    return <p className="bubble__text bubble__text--deleted">{message.text}</p>;
-  }
-
+function MessageText({ message }) {
   return <p className="bubble__text">{message.text}</p>;
 }
