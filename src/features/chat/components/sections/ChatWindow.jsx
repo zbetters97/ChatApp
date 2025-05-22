@@ -72,7 +72,7 @@ export default function ChatWindow() {
     }, 1500);
   };
 
-  if (activeChatId === -1 && isCollapsed) {
+  if (activeChatId === -1) {
     return (
       <section className={`chats chats--${theme}`} aria-expanded={isCollapsed}>
         <div className="chats__search">
