@@ -2,7 +2,7 @@
 
 .chat-search {
   position: relative;
-  padding: 1em;
+  padding: 1em 1em 0 1em;
 
   &__input {
     @include font(0.75);
@@ -38,7 +38,10 @@
     top: 100%;
     right: 0;
     left: 0;
+    margin: 0 auto;
+    border-radius: 12px;
     background-color: $basic-green;
+    width: 95%;
 
     &[aria-expanded="true"] {
       height: fit-content;
@@ -60,5 +63,42 @@
   &__name {
     @include font(0.75, bold);
     text-transform: capitalize;
+  }
+}
+
+@include md {
+  .chat-search {
+    padding: 0.5em;
+    width: 95%;
+    margin-left: auto;
+
+    &[aria-expanded="true"] {
+      display: none;
+    }
+
+    &__input {
+      border-radius: 30px;
+      font-size: 1.25rem;
+    }
+
+    &__users {
+      margin-top: -0.5em;
+    }
+
+    &__user {
+      &:hover {
+        background-color: $basic-green;
+      }
+    }
+
+    &__name {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+@include sm {
+  .chat-search {
+    width: 90%;
   }
 }

@@ -1,9 +1,6 @@
 @use "src/styles/abstracts" as *;
 
 .theme-toggle {
-  width: 65px;
-  padding: 0.5em 1em;
-
   &__input {
     display: none;
 
@@ -13,13 +10,13 @@
       }
 
       & ~ .theme-toggle__label {
-        & > .theme-toggle__sun {
+        & > .theme-toggle__icon--sun {
           transform: translateX(0px);
           opacity: 0;
         }
 
-        & > .theme-toggle__moon {
-          transform: translateX(-35px);
+        & > .theme-toggle__icon--moon {
+          transform: translateX(-30px);
           opacity: 1;
         }
       }
@@ -31,23 +28,24 @@
     cursor: pointer;
     border-radius: 30px;
     background-color: $icon-sun-bg;
-    padding: 10px;
+    padding: 5px 10px;
     width: fit-content;
-    height: 31px;
+    height: fit-content;
   }
 
-  &__sun {
-    transform: translateX(30px);
-    transition: 0.3s;
-    color: $icon-sun;
-    font-size: 25px;
-  }
+  &__icon {
+    transition: all 0.3s;
+    font-size: 20px;
 
-  &__moon {
-    transform: translateX(0px);
-    opacity: 0;
-    transition: 0.3s;
-    color: $icon-moon;
-    font-size: 25px;
+    &--sun {
+      transform: translateX(25px);
+      color: $icon-sun;
+    }
+
+    &--moon {
+      transform: translateX(0px);
+      opacity: 0;
+      color: $icon-moon;
+    }
   }
 }

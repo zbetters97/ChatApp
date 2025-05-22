@@ -18,6 +18,7 @@
 
 .main {
   @include flexrow(center, center);
+  flex: 1;
   margin: auto;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   width: 100%;
@@ -32,5 +33,13 @@
 
   &--dark {
     background-color: $dark-blue;
+  }
+}
+
+@include md {
+  .main {
+    box-shadow: none;
+    max-height: unset;
+    overflow: unset;
   }
 }

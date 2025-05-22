@@ -1,6 +1,20 @@
 @use "src/styles/abstracts" as *;
 
 .message {
+  @include flexrow(initial, center, 0.5em);
+
+  &--user {
+    flex-direction: row-reverse;
+  }
+
+  &__time {
+    @include font(0.25, normal, $light-gray);
+    @include padding-x(0.5em);
+    width: fit-content;
+  }
+}
+
+.bubble {
   display: inline-block;
   position: relative;
   border-radius: 20px;
@@ -16,6 +30,7 @@
     height: 15px;
     content: "";
   }
+
   &:after {
     position: absolute;
     bottom: 0;
@@ -34,15 +49,15 @@
   }
 
   &:hover {
-    .message__delete,
-    .message__like {
+    .bubble__delete,
+    .bubble__like {
       opacity: 1;
     }
   }
 
   &--clicked {
-    .message__delete,
-    .message__like {
+    .bubble__delete,
+    .bubble__like {
       opacity: 1;
     }
   }
@@ -74,7 +89,7 @@
       border-bottom-right-radius: 10px;
     }
 
-    &.message--light {
+    &.bubble--light {
       background: $lighter-gray;
 
       &:before {
@@ -82,20 +97,12 @@
       }
     }
 
-    &.message--dark {
+    &.bubble--dark {
       background: $basic-gray;
 
       &:before {
         background: $basic-gray;
       }
-    }
-  }
-
-  &__container {
-    @include flexrow(initial, center, 0.25em);
-
-    &--user {
-      flex-direction: row-reverse;
     }
   }
 
@@ -125,7 +132,7 @@
     &--user {
       left: -15px;
 
-      &.message__like--unliked {
+      &.bubble__like--unliked {
         display: none;
       }
     }
@@ -154,10 +161,58 @@
       @include font(initial, normal, $basic-white, italic);
     }
   }
+}
 
-  &__time {
-    @include font(0.25, normal, $light-gray);
-    @include padding-x(0.5em);
-    width: fit-content;
+@include md {
+  .message {
+    gap: 0.15em;
+
+    &__time {
+      font-size: 0.75rem;
+    }
+  }
+
+  .bubble {
+    max-width: 70%;
+
+    &--clicked {
+      .bubble__delete,
+      .bubble__like {
+        display: unset;
+      }
+    }
+
+    &__button {
+      font-size: 1rem;
+    }
+
+    &__delete {
+      display: none;
+      left: -20px;
+    }
+
+    &__like {
+      top: -10px;
+
+      &--user {
+        left: -12px;
+
+        &.bubble__like--unliked {
+          display: none;
+        }
+      }
+
+      &--friend {
+        right: -12px;
+      }
+
+      &--unliked {
+        display: none;
+      }
+    }
+
+    &__text {
+      font-size: 1rem;
+    }
   }
 }

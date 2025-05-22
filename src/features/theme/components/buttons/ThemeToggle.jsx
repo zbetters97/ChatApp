@@ -22,8 +22,14 @@ export default function ThemeToggle() {
         className="theme-toggle__input"
       />
       <label htmlFor="switch-button" className="theme-toggle__label">
-        <FontAwesomeIcon icon={faSun} className="theme-toggle__sun" />
-        <FontAwesomeIcon icon={faMoon} className="theme-toggle__moon" />
+        <FontAwesomeIcon
+          icon={faSun}
+          className="theme-toggle__icon theme-toggle__icon--sun"
+        />
+        <FontAwesomeIcon
+          icon={faMoon}
+          className="theme-toggle__icon theme-toggle__icon--moon"
+        />
       </label>
     </div>
   );

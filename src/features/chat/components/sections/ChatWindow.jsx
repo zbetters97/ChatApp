@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { db } from "src/config/firebase";
+import { MOBILE_WIDTH } from "src/data/const";
 import { formatDateDMD } from "src/utils/date";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
@@ -7,12 +8,14 @@ import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import NewMessage from "../inputs/NewMessage";
 import ChatSearch from "../inputs/ChatSearch";
 import MessageCard from "../cards/MessageCard";
+import BackButton from "../buttons/BackButton";
 import { useChatContext } from "../../context/ChatContext";
 import "./chat-window.scss";
 
 export default function ChatWindow() {
   const { globalUser } = useAuthContext();
-  const { activeChatId, activeChatUser, readMessage } = useChatContext();
+  const { isCollapsed, activeChatId, activeChatUser, readMessage } =
+    useChatContext();
   const { theme } = useThemeContext();
 
   const [messages, setMessages] = useState([]);
@@ -42,7 +45,7 @@ export default function ChatWindow() {
     return () => unsubscribe();
   }, [activeChatId, activeChatUser]);
 
-  async function processMessages(messages) {
+  const processMessages = async (messages) => {
     const messageData = await Promise.all(
       messages.map(async (message) => {
         if (!message || !globalUser) return null;
@@ -60,31 +63,36 @@ export default function ChatWindow() {
     );
 
     return messageData;
-  }
+  };
 
-  async function markAsRead() {
+  const markAsRead = async () => {
     // Delay read message to allow navbar to sync unread count
     setTimeout(async () => {
       await readMessage(activeChatId, globalUser.uid);
     }, 1500);
-  }
+  };
 
-  if (activeChatId === -1) {
+  if (activeChatId === -1 && isCollapsed) {
     return (
-      <section className={`chats chats--${theme}`}>
-        <ChatSearch />
+      <section className={`chats chats--${theme}`} aria-expanded={isCollapsed}>
+        <div className="chats__search">
+          <BackButton />
+          <ChatSearch />
+        </div>
       </section>
     );
   }
 
   return (
-    <section className={`chats chats--${theme}`}>
+    <section className={`chats chats--${theme}`} aria-expanded={isCollapsed}>
       <Messages messages={messages} />
     </section>
   );
 }
 
 function Messages({ messages }) {
+  const { isCollapsed } = useChatContext();
+
   const chatRef = useRef(null);
   const prevMessagLength = useRef(messages.length);
 
@@ -93,15 +101,26 @@ function Messages({ messages }) {
     if (messages.length < 3) return;
 
     // Scroll to bottom if new message comes in
-    if (prevMessagLength.current >= messages.length) return;
+    if (prevMessagLength.current.length >= messages.length) return;
 
-    chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    // Scroll to bottom for mobile and desktop
+    if (window.innerWidth <= MOBILE_WIDTH) {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+      });
+    } else {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }
 
     prevMessagLength.current = messages.length;
   }, [messages]);
 
   return (
-    <div ref={chatRef} className="chats__messages--wrapper">
+    <div
+      ref={chatRef}
+      className="chats__messages--wrapper"
+      aria-expanded={!isCollapsed}
+    >
       <Header />
 
       <div className="chats__messages">
@@ -119,6 +138,7 @@ function Messages({ messages }) {
             );
           })}
       </div>
+
       <NewMessage />
     </div>
   );
@@ -130,7 +150,11 @@ function Header() {
 
   return (
     <div className={`chats__header chats__header--${theme}`}>
-      <h2>{activeChatUser.fullname || "Display Name"}</h2>
+      <BackButton />
+
+      <h2 className="chats__name">
+        {activeChatUser.fullname || "Display Name"}
+      </h2>
     </div>
   );
 }

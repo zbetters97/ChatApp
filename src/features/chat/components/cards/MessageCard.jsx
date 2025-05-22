@@ -1,10 +1,10 @@
+import { formatTime } from "src/utils/date";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
 import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import { useChatContext } from "../../context/ChatContext";
 import "./message-card.scss";
-import { formatTime } from "src/utils/date";
 
 export default function MessageCard({ message }) {
   const { globalUser } = useAuthContext();
@@ -14,24 +14,20 @@ export default function MessageCard({ message }) {
 
   function handleClick(e) {
     // Reveal heart or delete button
-    e.target.parentNode.classList.add("message--clicked");
+    e.target.parentNode.classList.add("bubble--clicked");
 
     // Hide heart or delete button after 2 seconds
     setTimeout(() => {
-      e.target.parentNode.classList.remove("message--clicked");
+      e.target.parentNode.classList.remove("bubble--clicked");
     }, 2000);
   }
 
   return (
-    <div
-      className={`message__container message__container--${
-        isCurrentUser ? "user" : "friend"
-      }`}
-    >
+    <div className={`message message--${isCurrentUser ? "user" : "friend"}`}>
       <MessageTime message={message} />
       <div
         onClick={handleClick}
-        className={`message message--${theme} message--${
+        className={`bubble bubble--${theme} bubble--${
           isCurrentUser ? "user" : "friend"
         }`}
       >
@@ -49,6 +45,12 @@ export default function MessageCard({ message }) {
         <MessageContent message={message} />
       </div>
     </div>
+  );
+}
+
+function MessageTime({ message }) {
+  return (
+    <p className="message__time">{formatTime(message.createdAt.toDate())}</p>
   );
 }
 
@@ -71,7 +73,7 @@ function MessageDeleteButton({ message, isCurrentUser }) {
     <button
       type="button"
       onClick={handleDelete}
-      className="message__button message__delete"
+      className="bubble__button bubble__delete"
       aria-label="delete message"
     >
       <FontAwesomeIcon icon={faTrash} />
@@ -94,7 +96,7 @@ function MessageLikeButton({ message, isCurrentUser }) {
     <button
       type="button"
       onClick={handleLike}
-      className={`message__button message__like message__like--${color} message__like--${position}`}
+      className={`bubble__button bubble__like bubble__like--${color} bubble__like--${position}`}
       aria-label="like message"
     >
       <FontAwesomeIcon icon={faHeart} />
@@ -104,16 +106,8 @@ function MessageLikeButton({ message, isCurrentUser }) {
 
 function MessageContent({ message }) {
   if (message.isDeleted) {
-    return (
-      <p className="message__text message__text--deleted">{message.text}</p>
-    );
+    return <p className="bubble__text bubble__text--deleted">{message.text}</p>;
   }
 
-  return <p className="message__text">{message.text}</p>;
-}
-
-function MessageTime({ message }) {
-  return (
-    <p className="message__time">{formatTime(message.createdAt.toDate())}</p>
-  );
+  return <p className="bubble__text">{message.text}</p>;
 }

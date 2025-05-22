@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { MOBILE_WIDTH } from "src/data/const";
 import ChatList from "src/features/chat/components/list/ChatList";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
 import { useChatContext } from "src/features/chat/context/ChatContext";
@@ -8,7 +9,8 @@ import "./chat-page.scss";
 
 export default function ChatPage() {
   const { globalUser, loadingUser } = useAuthContext();
-  const { setActiveChatId, setActiveChatUser, readMessage } = useChatContext();
+  const { setIsCollapsed, setActiveChatId, setActiveChatUser, readMessage } =
+    useChatContext();
 
   const [mounted, setMounted] = useState(false);
   const [chatWindowKey, setChatWindowKey] = useState(0);
@@ -35,6 +37,7 @@ export default function ChatPage() {
         return;
       }
 
+      setIsCollapsed(false);
       setActiveChatId(-1);
       setActiveChatUser({});
       setChatWindowKey(0);
@@ -45,6 +48,11 @@ export default function ChatPage() {
     setActiveChatUser(chat);
     setActiveChatId(chat.chatId);
     setChatWindowKey(chat.chatId);
+
+    // Collapse sidebar on mobile
+    if (window.innerWidth <= MOBILE_WIDTH) {
+      setIsCollapsed(true);
+    }
 
     await readMessage(chat.chatId, globalUser.uid);
   }

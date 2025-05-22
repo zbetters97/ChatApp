@@ -4,7 +4,6 @@
   @include flexcol();
   position: relative;
   flex: 1;
-  transition: all 0.2s;
   border-radius: 12px;
 
   &--light {
@@ -18,7 +17,8 @@
   &__header {
     @include font(0.5, bold);
     @include flexrow(space-between, center, 0.5em);
-    padding: 0.75em;
+    position: relative;
+    padding: 0.75em 0.5em;
     overflow: hidden;
 
     &--light {
@@ -28,6 +28,14 @@
     &--dark {
       color: $basic-white;
     }
+  }
+
+  &__title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-wrap: nowrap;
   }
 
   &__compose {
@@ -94,6 +102,53 @@
 
     &--dark:hover {
       color: $basic-white;
+    }
+  }
+}
+
+@include md {
+  .chatlist {
+    border-radius: 0;
+
+    &[aria-expanded="false"] {
+      flex: 0 0 0;
+      border: none;
+      overflow: hidden;
+    }
+
+    &[aria-expanded="true"] {
+      flex: 1 1 100%;
+      border: none;
+    }
+
+    &__header {
+      padding: 1em;
+      font-size: 1rem;
+    }
+
+    &__compose {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem;
+    }
+
+    &__footer {
+      @include padding-y(1.5em);
+      height: fit-content;
+    }
+
+    &__current-user {
+      font-size: 1.25rem;
+    }
+
+    &__logout {
+      font-size: 1.5rem;
+
+      &:hover {
+        color: $light-gray;
+      }
     }
   }
 }

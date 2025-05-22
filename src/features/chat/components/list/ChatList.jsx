@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ThemeToggle from "src/layouts/buttons/ThemeToggle";
+import { MOBILE_WIDTH } from "src/data/const";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useChatContext } from "src/features/chat/context/ChatContext";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
 import { useThemeContext } from "src/features/theme/context/ThemeContext";
+import ThemeToggle from "src/features/theme/components/buttons/ThemeToggle";
 import {
   faArrowRightFromBracket,
   faPenToSquare,
@@ -12,11 +14,20 @@ import ChatCard from "../cards/ChatCard";
 import "./chat-list.scss";
 
 export default function ChatList({ handleOpenChat }) {
+  const { isCollapsed } = useChatContext();
   const { theme } = useThemeContext();
 
+  useEffect(() => {
+    if (isCollapsed) return;
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [isCollapsed]);
+
   return (
-    <section className={`chatlist chatlist--${theme}`}>
-      <ThemeToggle />
+    <section
+      className={`chatlist chatlist--${theme}`}
+      aria-expanded={!isCollapsed}
+    >
       <Header />
       <Chats handleOpenChat={handleOpenChat} />
       <Footer />
@@ -29,7 +40,8 @@ function Header() {
 
   return (
     <div className={`chatlist__header chatlist__header--${theme}`}>
-      <h2>All chats</h2>
+      <ThemeToggle />
+      <h2 className="chatlist__title">All chats</h2>
       <Compose />
     </div>
   );
@@ -37,14 +49,19 @@ function Header() {
 
 function Compose() {
   const { globalUser } = useAuthContext();
-  const { setActiveChatId, activeChatUser, setActiveChatUser } =
+  const { setIsCollapsed, setActiveChatId, activeChatUser, setActiveChatUser } =
     useChatContext();
   const { theme } = useThemeContext();
 
   async function handleNewChat() {
     if (!activeChatUser || !globalUser) return;
+
     setActiveChatId(-1);
     setActiveChatUser({});
+
+    if (window.innerWidth <= MOBILE_WIDTH) {
+      setIsCollapsed(true);
+    }
   }
 
   return (
