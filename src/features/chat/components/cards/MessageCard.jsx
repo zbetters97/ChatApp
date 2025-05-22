@@ -23,7 +23,11 @@ export default function MessageCard({ message }) {
   }
 
   return (
-    <div className={`message message--${isCurrentUser ? "user" : "friend"}`}>
+    <div
+      className={`message message--${
+        isCurrentUser ? "user" : "friend"
+      } message--${message.isLiked ? "liked" : "unliked"} `}
+    >
       <MessageTime message={message} />
       <div
         onClick={handleClick}

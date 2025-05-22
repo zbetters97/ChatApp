@@ -43,7 +43,7 @@
 
   &__messages {
     @include padding-x(1em);
-    @include flexcol($gap: 1.5em);
+    @include flexcol($gap: 0.5em);
     flex-grow: 1;
     margin-bottom: 90px;
     max-width: 100%;
@@ -92,8 +92,7 @@
     }
 
     &__messages {
-      @include padding-x(1em);
-      gap: 1.25em;
+      @include padding-x(1.25em);
       margin-bottom: 0px;
       height: 100%;
 
@@ -103,7 +102,7 @@
     }
 
     &__date {
-      font-size: 0.75rem;
+      font-size: 1rem;
     }
   }
 }

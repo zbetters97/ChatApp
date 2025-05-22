@@ -71,7 +71,8 @@
 
 @include md {
   .new-message {
-    height: 40px;
+    border-radius: 17px;
+    height: 44px;
 
     &__container {
       @include padding-x(0.5em);
@@ -81,8 +82,8 @@
     }
 
     &__input {
-      font-size: 1.25rem;
       padding-left: 0.25em;
+      font-size: 1.5rem;
     }
 
     &__button {

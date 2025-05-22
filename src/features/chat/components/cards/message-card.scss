@@ -7,6 +7,10 @@
     flex-direction: row-reverse;
   }
 
+  &--liked {
+    padding-top: 1em;
+  }
+
   &__time {
     @include font(0.25, normal, $light-gray);
     @include padding-x(0.5em);
@@ -108,7 +112,7 @@
 
   &__button {
     @include font(0.5);
-    @include badge(0.65, $light-gray, $darker-gray, 1.5em);
+    @include badge(0.65, $light-gray, $darker-gray, 1.75em);
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -116,7 +120,7 @@
 
   &__delete {
     top: 50%;
-    left: -30px;
+    left: -35px;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 2px $basic-black;
 
@@ -126,11 +130,11 @@
   }
 
   &__like {
-    top: -18px;
-    box-shadow: 0 0 2px $basic-black;
+    top: -20px;
+    box-shadow: 0 0 5px $basic-black;
 
     &--user {
-      left: -15px;
+      left: -22px;
 
       &.bubble__like--unliked {
         display: none;
@@ -138,7 +142,7 @@
     }
 
     &--friend {
-      right: -15px;
+      right: -22px;
 
       &:hover {
         opacity: 1;
@@ -188,19 +192,19 @@
     }
 
     &__button {
-      font-size: 1rem;
+      font-size: 1.5rem;
     }
 
     &__delete {
       display: none;
-      left: -20px;
+      left: -40px;
     }
 
     &__like {
-      top: -10px;
+      top: -25px;
 
       &--user {
-        left: -12px;
+        left: -25px;
 
         &.bubble__like--unliked {
           display: none;
@@ -208,7 +212,7 @@
       }
 
       &--friend {
-        right: -12px;
+        right: -25px;
       }
 
       &--unliked {
