@@ -2,10 +2,14 @@ import { db } from "src/config/firebase";
 import {
   arrayUnion,
   collection,
+  deleteDoc,
   doc,
   getDoc,
+  getDocs,
+  query,
   setDoc,
   updateDoc,
+  where,
 } from "firebase/firestore";
 
 export function useChat() {
@@ -81,6 +85,46 @@ export function useChat() {
           }),
         });
       }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function deleteChat(chatId) {
+    try {
+      const chatRef = doc(db, "chats", chatId);
+      if (!chatRef) return;
+
+      // Delete chat from chats collection
+      await deleteDoc(chatRef);
+
+      const userChatsRef = collection(db, "userchats");
+      if (!userChatsRef) return;
+
+      // Query all userchats
+      const q = query(userChatsRef);
+      const snapshot = await getDocs(q);
+
+      // Filter the query by the chats array where...
+      // the map's chatId matches givn param
+      const filteredData = snapshot.docs.filter((doc) => {
+        const chats = doc.data().chats;
+        return chats.some((chat) => chat.chatId === chatId);
+      });
+
+      // If no matches, return
+      if (filteredData.length === 0) return;
+
+      // Iterate through matches
+      filteredData.forEach((doc) => {
+        const chats = doc.data().chats;
+
+        // Create new array without deleted chat map
+        const updatedChats = chats.filter((chat) => chat.chatId !== chatId);
+
+        // Replace userchats array with new array
+        updateDoc(doc.ref, { chats: updatedChats });
+      });
     } catch (error) {
       console.log(error);
     }
@@ -266,6 +310,7 @@ export function useChat() {
     getUnreadChatsByUserId,
 
     addChat,
+    deleteChat,
 
     sendMessage,
     readMessage,

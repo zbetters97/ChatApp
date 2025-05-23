@@ -14,18 +14,35 @@ import "./chat-window.scss";
 
 export default function ChatWindow() {
   const { globalUser } = useAuthContext();
-  const { isCollapsed, activeChatId, activeChatUser, readMessage } =
-    useChatContext();
+  const {
+    isCollapsed,
+    activeChatId,
+    setActiveChatId,
+    activeChatUser,
+    setActiveChatUser,
+    readMessage,
+  } = useChatContext();
   const { theme } = useThemeContext();
 
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    if (activeChatId === -1) return;
+    if (activeChatId === -1) {
+      setMessages([]);
+      return;
+    }
 
     const unsubscribe = onSnapshot(
       doc(db, "chats", activeChatId),
       async (doc) => {
+        // Reset state if chat doesn't exist
+        if (!doc.exists()) {
+          setMessages([]);
+          setActiveChatUser({});
+          setActiveChatId(-1);
+          return;
+        }
+
         const messages = doc
           .data()
           .messages.sort((a, b) => a.createdAt - b.createdAt);
@@ -35,7 +52,7 @@ export default function ChatWindow() {
         const messageData = await processMessages(messages);
         setMessages(messageData);
 
-        markAsRead();
+        await markAsRead();
       },
       (error) => {
         console.log(error);
@@ -66,7 +83,7 @@ export default function ChatWindow() {
   };
 
   const markAsRead = async () => {
-    // Delay read message to allow navbar to sync unread count
+    // Delay read message to allow chatlist to update unread
     setTimeout(async () => {
       await readMessage(activeChatId, globalUser.uid);
     }, 1500);

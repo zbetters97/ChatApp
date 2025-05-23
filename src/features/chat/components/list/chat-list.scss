@@ -63,6 +63,7 @@
     @include flexcol(initial, stretch, 1em);
     padding: 1em;
     overflow-y: auto;
+    height: 100%;
   }
 
   &__footer {

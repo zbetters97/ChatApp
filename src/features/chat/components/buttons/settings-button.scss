@@ -1,0 +1,31 @@
+@use "src/styles/abstracts" as *;
+
+.settings {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  &__button {
+    padding: 0.25em 0.5em;
+    color: $basic-white;
+    font-size: 1.5rem;
+  }
+
+  &__dropdown {
+    @include dropdown(right, 0.25em, 0.5em);
+    z-index: 2;
+    background-color: $basic-blue;
+  }
+
+  &__item {
+    @include font(0.75, bold);
+    padding: 0.25em 0.5em;
+    width: 100%;
+    letter-spacing: 0.05em;
+    text-align: left;
+
+    &:hover {
+      color: $light-gray;
+    }
+  }
+}

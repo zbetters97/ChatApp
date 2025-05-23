@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { MOBILE_WIDTH } from "src/data/const";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useChatContext } from "src/features/chat/context/ChatContext";
+import { useChatContext } from "../../context/ChatContext";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
 import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import ThemeToggle from "src/features/theme/components/buttons/ThemeToggle";
@@ -96,7 +96,7 @@ function Chats({ handleOpenChat }) {
 }
 
 function Footer() {
-  const { loadingUser, globalUser, logout } = useAuthContext();
+  const { globalUser, logout } = useAuthContext();
   const { theme } = useThemeContext();
 
   const navigate = useNavigate();
