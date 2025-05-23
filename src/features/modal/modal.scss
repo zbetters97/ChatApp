@@ -1,0 +1,58 @@
+@use "src/styles/abstracts" as *;
+
+.modal {
+  @include flexrow(center, center);
+  @include font(1);
+  position: fixed;
+  visibility: hidden;
+  z-index: 98;
+  transition: all 0.2s;
+  inset: 0;
+
+  &[aria-expanded="true"] {
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  &[aria-expanded="true"] &__container {
+    transform: scale(100%);
+    opacity: 100;
+  }
+
+  &__container {
+    padding: 1em;
+    position: relative;
+    transform: scale(50%);
+    opacity: 0;
+    z-index: 99;
+    transition: all 0.2s;
+    width: fit-content;
+    max-width: 800px;
+    background-color: $darker-blue;
+    border-radius: 12px;
+  }
+
+  &__button {
+    @include font(2, bold);
+    position: absolute;
+    top: 1%;
+    right: 3%;
+  }
+}
+
+@include md {
+  .modal {
+    &__container {
+      max-width: none;
+      height: fit-content;
+      max-height: --webkit-fill-available;
+      max-height: 100%;
+      overflow-y: auto;
+    }
+
+    &__button {
+      font-size: 2.5rem;
+      top: 0;
+    }
+  }
+}

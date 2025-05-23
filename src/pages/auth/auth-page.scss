@@ -4,7 +4,7 @@
   @include padding-y(2em);
   margin: auto;
   width: 100%;
-  max-width: 600px;
+  max-width: 770px;
 
   &__header {
     @include font(1);
@@ -14,7 +14,9 @@
   &__container {
     @include flexcol(center, center, 1em);
     margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     border-radius: 12px;
+    background-color: $darker-blue;
     padding: 1em;
     width: 100%;
   }
@@ -22,7 +24,13 @@
   &__form {
     @include flexcol(initial, center, 0.5em);
     margin: auto;
-    width: fit-content;
+    width: 100%;
+    @include padding-y(1em);
+
+    &--reset {
+      padding: 1em;
+      gap: 0.75em;
+    }
   }
 
   &__group {
@@ -30,23 +38,27 @@
   }
 
   &__label {
-    @include font(0.75);
+    @include font(1);
   }
 
   &__input {
-    @include font(0.75);
+    @include font(1);
     outline: none;
     border: 2px solid $basic-white;
     padding: 0.15em 0.25em;
+
+    &--invalid {
+      border-color: $basic-red;
+    }
   }
 
   &__submit {
     @include font(1);
     margin: auto;
+    background-color: $basic-white;
     padding: 0.5em 1em;
     width: fit-content;
     color: $basic-black;
-    background-color: $basic-white;
   }
 
   &__reset {
@@ -55,7 +67,7 @@
   }
 
   &__highlight {
-    @include font(0.75, bold, $basic-green);
+    @include font(0.75, bold, $light-green);
   }
 
   &__back {
@@ -115,6 +127,60 @@
 
     &--before {
       left: 0;
+    }
+  }
+}
+
+@include md {
+  .auth {
+    @include flexcol(center, center);
+    background-color: $darker-blue;
+    padding: 0;
+    height: 100%;
+
+    &__container {
+      box-shadow: none;
+      border-radius: 0px;
+      padding: 0;
+      height: fit-content;
+    }
+
+    &__form {
+      width: 90%;
+    }
+
+    &__header {
+      font-size: 1.25rem;
+    }
+
+    &__group {
+      align-items: stretch;
+      width: 100%;
+    }
+
+    &__label {
+      font-size: 1.25rem;
+    }
+
+    &__input {
+      font-size: 1.25rem;
+    }
+
+    &__submit {
+      font-size: 1.25rem;
+    }
+
+    &__back {
+      border: none;
+      font-size: 1rem;
+    }
+
+    &__reset {
+      font-size: 1rem;
+    }
+
+    &__highlight {
+      font-size: 1rem;
     }
   }
 }

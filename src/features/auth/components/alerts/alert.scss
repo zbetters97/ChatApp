@@ -1,7 +1,7 @@
 @use "src/styles/abstracts" as *;
 
 .alert {
-  @include font(0.5, normal, $basic-white, italic);
+  @include font(0.75, normal, $basic-white, italic);
   @include padding-y(1em);
   @include flexrow(center, center, 0.5em);
   opacity: 0;
@@ -16,5 +16,12 @@
 
   &__icon {
     color: $basic-red;
+  }
+}
+
+@include md {
+  .alert {
+    font-size: 1rem;
+    padding: 0;
   }
 }

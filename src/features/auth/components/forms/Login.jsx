@@ -1,9 +1,11 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { isEmailValid } from "src/utils/form";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
-import Alert from "./Alert";
+import Alert from "../alerts/Alert";
+import ForgotPasswordButton from "../buttons/ForgotPasswordButton";
 
 export default function Login({ setIsSignup }) {
   const { login } = useAuthContext();
@@ -21,7 +23,7 @@ export default function Login({ setIsSignup }) {
     const email = formData.get("email");
     const password = formData.get("password");
 
-    if (!validateData(email, password)) {
+    if (!validateData()) {
       return;
     }
 
@@ -30,14 +32,25 @@ export default function Login({ setIsSignup }) {
     }
   };
 
-  const validateData = (email, password) => {
-    if (!email || email === "") {
+  const validateData = () => {
+    const email = formRef.current.elements.email;
+    const password = formRef.current.elements.password;
+
+    if (email.value === "") {
       setError("Please enter an email.");
+      email.classList.add("auth__input--invalid");
       return false;
     }
 
-    if (!password || password === "") {
+    if (isEmailValid(email.value) === false) {
+      setError("Please enter a valid email.");
+      email.classList.add("auth__input--invalid");
+      return false;
+    }
+
+    if (password.value === "") {
       setError("Please enter a password.");
+      password.classList.add("auth__input--invalid");
       return false;
     }
 
@@ -53,7 +66,7 @@ export default function Login({ setIsSignup }) {
       <FormInput id="email" label="Email" type="email" />
       <FormInput id="password" label="Password" type="password" />
 
-      <ResetPassword />
+      <ForgotPasswordButton setError={setError} />
 
       <Alert message={error} />
       <SubmitButton />
@@ -64,24 +77,22 @@ export default function Login({ setIsSignup }) {
 }
 
 function FormInput({ id, label, type }) {
+  const handleChange = (e) => {
+    e.target.classList.remove("auth__input--invalid");
+  };
+
   return (
     <div className="auth__group">
       <label htmlFor={id} className="auth__label">
         {label}
       </label>
-      <input id={id} name={id} type={type} className="auth__input" />
-    </div>
-  );
-}
-
-function ResetPassword() {
-  return (
-    <div className="auth__reset">
-      <p>Forgot password?</p>
-
-      <button type="button" className="auth__highlight">
-        Click here
-      </button>
+      <input
+        id={id}
+        name={id}
+        type={type}
+        onChange={handleChange}
+        className="auth__input"
+      />
     </div>
   );
 }

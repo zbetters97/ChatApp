@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
+import { isEmailValid } from "src/utils/form";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
-import Alert from "./Alert";
+import Alert from "../alerts/Alert";
 
 export default function Signup({ setIsSignup }) {
   const { signup } = useAuthContext();
@@ -20,18 +21,8 @@ export default function Signup({ setIsSignup }) {
     const displayname = formData.get("displayname");
     const email = formData.get("email");
     const password = formData.get("password");
-    const repassword = formData.get("repassword");
 
-    if (
-      !validateData(
-        firstname,
-        lastname,
-        displayname,
-        email,
-        password,
-        repassword
-      )
-    ) {
+    if (!validateData()) {
       return;
     }
 
@@ -42,46 +33,60 @@ export default function Signup({ setIsSignup }) {
     }
   };
 
-  const validateData = (
-    firstname,
-    lastname,
-    displayname,
-    email,
-    password,
-    repassword
-  ) => {
-    if (!firstname || firstname === "") {
+  const validateData = () => {
+    const firstname = formRef.current.elements.firstname;
+    const lastname = formRef.current.elements.lastname;
+    const displayname = formRef.current.elements.displayname;
+    const email = formRef.current.elements.email;
+    const password = formRef.current.elements.password;
+    const repassword = formRef.current.elements.repassword;
+
+    if (firstname.value === "") {
       setError("Please enter a first name.");
+      firstname.classList.add("auth__input--invalid");
       return false;
     }
 
-    if (!lastname || lastname === "") {
+    if (lastname.value === "") {
       setError("Please enter a last name.");
+      lastname.classList.add("auth__input--invalid");
       return false;
     }
 
-    if (!displayname || displayname === "") {
+    if (displayname.value === "") {
       setError("Please enter a display name.");
+      displayname.classList.add("auth__input--invalid");
       return false;
     }
 
-    if (!email || email === "") {
+    if (email.value === "") {
       setError("Please enter an email.");
+      email.classList.add("auth__input--invalid");
       return false;
     }
 
-    if (!password || password === "") {
+    if (!isEmailValid(email.value)) {
+      setError("Please enter a valid email.");
+      email.classList.add("auth__input--invalid");
+      return false;
+    }
+
+    if (password.value === "") {
       setError("Please enter a password.");
+      password.classList.add("auth__input--invalid");
       return false;
     }
 
-    if (!repassword || repassword === "") {
+    if (repassword.value === "") {
       setError("Please re-enter the password.");
+      repassword.classList.add("auth__input--invalid");
       return false;
     }
 
-    if (password !== repassword) {
+    if (password.value !== repassword.value) {
       setError("Passwords do not match.");
+      password.classList.add("auth__input--invalid");
+      repassword.classList.add("auth__input--invalid");
       return false;
     }
 
@@ -112,12 +117,22 @@ export default function Signup({ setIsSignup }) {
 }
 
 function FormInput({ id, label, type }) {
+  const handleChange = (e) => {
+    e.target.classList.remove("auth__input--invalid");
+  };
+
   return (
     <div className="auth__group">
       <label htmlFor={id} className="auth__label">
         {label}
       </label>
-      <input id={id} name={id} type={type} className="auth__input" />
+      <input
+        id={id}
+        name={id}
+        type={type}
+        onChange={handleChange}
+        className="auth__input"
+      />
     </div>
   );
 }
