@@ -60,9 +60,9 @@ export default function SettingsButton({ chat }) {
       />
 
       <div className="settings__dropdown" aria-expanded={showSettings}>
-        <Button label={chat.pinned ? "Unpin" : "Pin"} onClick={handlePin} />
-        <Button label="Block" onClick={handleBlock} />
-        <Button label="Delete" onClick={handleDelete} />
+        <Button label={chat.pinned ? "UNPIN" : "PIN"} onClick={handlePin} />
+        <Button label="BLOCK" onClick={handleBlock} />
+        <Button label="DELETE" onClick={handleDelete} />
       </div>
     </div>
   );
