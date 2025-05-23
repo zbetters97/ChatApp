@@ -25,18 +25,34 @@ export default function ChatProvder({ children }) {
           return;
         }
 
+        if (!doc.data().chats) {
+          setChats([]);
+          return;
+        }
+
         const fetchedChats = await Promise.all(
           doc.data().chats.map(async (chat) => {
             const user = await getUserById(chat.recipientId);
 
             return {
+              id: chat.recipientId,
               ...chat,
               ...user,
             };
           })
         );
 
-        setChats(fetchedChats);
+        // Sort chats by pinned (alphabetical) then by last updated
+        const sortedChats = fetchedChats.sort((a, b) => {
+          if (a.pinned && !b.pinned) return -1;
+          if (!a.pinned && b.pinned) return 1;
+          if (a.pinned && b.pinned) {
+            return a.lastname.localeCompare(b.lastname);
+          }
+          return b.updatedAt - a.updatedAt;
+        });
+
+        setChats(sortedChats);
       }
     );
 
@@ -45,6 +61,7 @@ export default function ChatProvder({ children }) {
 
   const chatMethods = {
     chats,
+    setChats,
     activeChatId,
     setActiveChatId,
     activeChatUser,

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { MOBILE_WIDTH } from "src/data/const";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useChatContext } from "../../context/ChatContext";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
 import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import ThemeToggle from "src/features/theme/components/buttons/ThemeToggle";
@@ -11,6 +10,7 @@ import {
   faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import ChatCard from "../cards/ChatCard";
+import { useChatContext } from "../../context/ChatContext";
 import "./chat-list.scss";
 
 export default function ChatList({ handleOpenChat }) {
@@ -53,7 +53,7 @@ function Compose() {
     useChatContext();
   const { theme } = useThemeContext();
 
-  async function handleNewChat() {
+  const handleNewChat = async () => {
     if (!activeChatUser || !globalUser) return;
 
     setActiveChatId(-1);
@@ -62,7 +62,7 @@ function Compose() {
     if (window.innerWidth <= MOBILE_WIDTH) {
       setIsCollapsed(true);
     }
-  }
+  };
 
   return (
     <button

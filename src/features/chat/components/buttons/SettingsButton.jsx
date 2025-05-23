@@ -6,7 +6,7 @@ import { useChatContext } from "../../context/ChatContext";
 import "./settings-button.scss";
 
 export default function SettingsButton({ chat }) {
-  const { deleteChat } = useChatContext();
+  const { pinChat, deleteChat } = useChatContext();
   const { theme } = useThemeContext();
 
   const [showSettings, setShowSettings] = useState(false);
@@ -30,10 +30,11 @@ export default function SettingsButton({ chat }) {
     setShowSettings(!showSettings);
   };
 
-  const handlePin = (e) => {
+  const handlePin = async (e) => {
     e.stopPropagation();
+    setShowSettings(false);
 
-    console.log("pin");
+    await pinChat(chat.chatId, chat.recipientId);
   };
 
   const handleBlock = (e) => {
@@ -59,7 +60,7 @@ export default function SettingsButton({ chat }) {
       />
 
       <div className="settings__dropdown" aria-expanded={showSettings}>
-        <Button label="Pin" onClick={handlePin} />
+        <Button label={chat.pinned ? "Unpin" : "Pin"} onClick={handlePin} />
         <Button label="Block" onClick={handleBlock} />
         <Button label="Delete" onClick={handleDelete} />
       </div>

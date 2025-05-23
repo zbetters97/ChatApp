@@ -71,6 +71,8 @@ export function useChat() {
               chatId,
               lastMessage: "",
               recipientId,
+              unread: 0,
+              pinned: false,
               updatedAt: new Date(),
             },
           ],
@@ -81,10 +83,67 @@ export function useChat() {
             chatId,
             lastMessage: "",
             recipientId,
+            unread: 0,
+            pinned: false,
             updatedAt: new Date(),
           }),
         });
       }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function pinChat(chatId, recipientId) {
+    try {
+      const userChatsRef = collection(db, "userchats");
+      if (!userChatsRef) return;
+
+      // Query all userchats
+      const q = query(userChatsRef);
+      const snapshot = await getDocs(q);
+
+      // Filter the query by the chats array where...
+      // the map's chatId and recipientId match
+      const filteredData = snapshot.docs.filter((doc) => {
+        const chats = doc.data().chats;
+        return chats.some(
+          (chat) => chat.chatId === chatId && chat.recipientId === recipientId
+        );
+      });
+
+      // If no matches, return
+      if (filteredData.length === 0) return;
+
+      // Iterate through matches
+      filteredData.forEach((doc) => {
+        const chats = doc.data().chats;
+
+        // Create new array with updated pinned value
+        const updatedChats = chats.map((chat) => {
+          if (chat.chatId === chatId && chat.recipientId === recipientId) {
+            return {
+              ...chat,
+              pinned: !chat.pinned,
+            };
+          }
+
+          return chat;
+        });
+
+        // Update userchats with new array
+        updateDoc(doc.ref, {
+          chats: updatedChats,
+        });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function reorderChats(userChatId, newOrder) {
+    try {
+      await updateDoc(doc(db, "userchats", userChatId), { chats: newOrder });
     } catch (error) {
       console.log(error);
     }
@@ -106,7 +165,7 @@ export function useChat() {
       const snapshot = await getDocs(q);
 
       // Filter the query by the chats array where...
-      // the map's chatId matches givn param
+      // the map's chatId matches
       const filteredData = snapshot.docs.filter((doc) => {
         const chats = doc.data().chats;
         return chats.some((chat) => chat.chatId === chatId);
@@ -310,6 +369,8 @@ export function useChat() {
     getUnreadChatsByUserId,
 
     addChat,
+    pinChat,
+    reorderChats,
     deleteChat,
 
     sendMessage,

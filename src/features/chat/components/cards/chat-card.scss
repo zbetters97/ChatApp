@@ -19,6 +19,13 @@
     background-color: $basic-blue;
   }
 
+  &__pin {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.5em;
+  }
+
   &__icon {
     @include font(2.5, normal, $basic-white);
   }
@@ -27,9 +34,17 @@
     @include flexcol(initial, flex-start, 0.25em);
   }
 
+  &__header {
+    @include flexrow(space-between, center, 1em);
+  }
+
   &__username {
     @include font(0.75, normal, $basic-white);
     text-transform: capitalize;
+  }
+
+  &__time {
+    @include font(0.5);
   }
 
   &__message {

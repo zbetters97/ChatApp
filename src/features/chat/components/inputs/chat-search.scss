@@ -40,7 +40,7 @@
     left: 0;
     margin: 0 auto;
     border-radius: 12px;
-    background-color: $basic-green;
+    background-color: $basic-blue;
     width: 95%;
 
     &[aria-expanded="true"] {
@@ -54,23 +54,23 @@
     @include flexrow(initial, center, 0.25em);
     padding: 1em;
     text-align: left;
-
-    &:hover {
-      background-color: $darker-green;
-    }
   }
 
   &__name {
     @include font(0.75, bold);
     text-transform: capitalize;
+
+    &:hover {
+      color: $light-gray;
+    }
   }
 }
 
 @include md {
   .chat-search {
+    margin-left: auto;
     padding: 0.5em;
     width: 95%;
-    margin-left: auto;
 
     &[aria-expanded="true"] {
       display: none;
@@ -85,14 +85,12 @@
       margin-top: -0.5em;
     }
 
-    &__user {
-      &:hover {
-        background-color: $basic-green;
-      }
-    }
-
     &__name {
       font-size: 1.25rem;
+
+      &:hover {
+        color: $basic-white;
+      }
     }
   }
 }
