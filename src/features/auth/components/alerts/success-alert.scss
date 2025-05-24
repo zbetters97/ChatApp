@@ -7,6 +7,14 @@
   &__message {
     @include font(1.25, normal, $light-green, italic);
     @include flexrow(center, center, 0.5em);
+
+    &--light {
+      color: $lighter-green;
+    }
+
+    &--dark {
+      color: $light-green;
+    }
   }
 
   &__button {
@@ -16,9 +24,19 @@
     border: 1px solid $basic-white;
     padding: 0.5em 0.75em;
 
+    &--light {
+      border-color: $basic-black;
+      color: $basic-black;
+    }
+
+    &--dark {
+      border-color: $basic-white;
+      color: $basic-white;
+    }
+    
     &:hover {
       color: $lighter-gray;
-    }
+    }    
   }
 }
 

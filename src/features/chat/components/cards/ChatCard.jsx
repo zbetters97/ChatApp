@@ -12,11 +12,6 @@ export default function ChatCard({ chat, handleOpenChat }) {
 
   const isActive = activeChatUser.uid === chat.uid;
 
-  const lastMessage =
-    chat.lastMessage.length > 40
-      ? `${chat.lastMessage.slice(0, 40)}...`
-      : chat.lastMessage;
-
   return (
     <div
       onClick={() => handleOpenChat(chat)}
@@ -36,8 +31,13 @@ export default function ChatCard({ chat, handleOpenChat }) {
             {getTimeSinceShort(chat.updatedAt.toDate())}
           </p>
         </div>
-        <p className="chat-card__message">{lastMessage || "No messages"}</p>
-        {chat.unread > 0 && <span className={`chat-card__unread`} />}
+        <p
+          className={`chat-card__message ${
+            chat.unread > 0 && "chat-card__message--unread"
+          }`}
+        >
+          {chat.lastMessage || "No messages"}
+        </p>
       </div>
 
       <SettingsButton chat={chat} />

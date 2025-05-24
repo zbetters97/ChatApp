@@ -10,6 +10,14 @@
   width: fit-content;
   height: 20px;
 
+  &--light {
+    color: $basic-black;
+  }
+
+  &--dark {
+    color: $basic-white;
+  }
+
   &[aria-expanded="true"] {
     opacity: 1;
   }

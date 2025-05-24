@@ -5,6 +5,7 @@
   position: relative;
   flex: 1;
   border-radius: 12px;
+  overflow-x: hidden;
 
   &--light {
     background-color: $light-white;
@@ -62,8 +63,8 @@
   &__chats {
     @include flexcol(initial, stretch, 1em);
     padding: 1em;
-    overflow-y: auto;
     height: 100%;
+    overflow-y: auto;    
   }
 
   &__footer {

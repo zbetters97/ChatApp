@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import Login from "src/features/auth/components/forms/Login";
 import Signup from "src/features/auth/components/forms/Signup";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
+import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import "./auth-page.scss";
 
 export default function AuthPage() {
   const { globalUser, loadingUser } = useAuthContext();
+  const { theme } = useThemeContext();
 
   const [loading, setLoading] = useState(true);
   const [isSignup, setIsSignup] = useState(false);
@@ -22,7 +24,7 @@ export default function AuthPage() {
       }
 
       if (globalUser) {
-        navigate("/home");
+        navigate("/messages");
       }
 
       setLoading(false);
@@ -32,12 +34,12 @@ export default function AuthPage() {
   }, [globalUser, loadingUser]);
 
   if (loading) {
-    return <section>Loading...</section>;
+    return null;
   }
 
   return (
     <section className="auth">
-      <div className="auth__container">
+      <div className={`auth__container auth__container--${theme}`}>
         <Header isSignup={isSignup} />
 
         {isSignup ? (

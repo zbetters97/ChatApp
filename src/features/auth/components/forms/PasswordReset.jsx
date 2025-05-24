@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { isEmailValid } from "src/utils/form";
+import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import Alert from "../alerts/Alert";
 import { useAuthContext } from "../../context/AuthContext";
 
 export default function PasswordReset({ isModalOpen, setSuccess }) {
   const { checkIfEmailExists, resetPassword } = useAuthContext();
+  const { theme } = useThemeContext();
 
   const [error, setError] = useState("");
   const inputRef = useRef(null);
@@ -62,14 +64,21 @@ export default function PasswordReset({ isModalOpen, setSuccess }) {
   };
 
   return (
-    <div className="auth__form auth__form--reset">
-      <h1 className="form__header">Reset your password</h1>
+    <div className={`auth__form auth__form--reset auth__form--reset--${theme}`}>
+      <h1 className={`auth__header auth__header--${theme}`}>
+        Reset your password
+      </h1>
 
       <div className="auth__group">
-        <label htmlFor="reset-email">Email</label>
+        <label
+          htmlFor="reset-email"
+          className={`auth__label auth__label--${theme}`}
+        >
+          Email
+        </label>
         <input
           ref={inputRef}
-          className="auth__input"
+          className={`auth__input auth__input--${theme}`}
           name="reset-email"
           type="reset-email"
           onChange={handleChange}
@@ -80,7 +89,7 @@ export default function PasswordReset({ isModalOpen, setSuccess }) {
       <button
         type="submit"
         onClick={handleSubmit}
-        className="auth__submit"
+        className={`auth__submit auth__submit--${theme}`}
         aria-label="reset password"
       >
         Submit

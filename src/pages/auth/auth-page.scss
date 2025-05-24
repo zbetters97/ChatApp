@@ -9,6 +9,14 @@
   &__header {
     @include font(1);
     padding-bottom: 1em;
+
+    &--light {
+      color: $basic-black;
+    }
+
+    &--dark {
+      color: $basic-white;
+    }
   }
 
   &__container {
@@ -16,9 +24,16 @@
     margin: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     border-radius: 12px;
-    background-color: $darker-blue;
     padding: 1em;
     width: 100%;
+
+    &--light {
+      background-color: $light-white;
+    }
+
+    &--dark {
+      background-color: $darker-blue;
+    }
   }
 
   &__form {
@@ -39,6 +54,14 @@
 
   &__label {
     @include font(1);
+
+    &--light {
+      color: $basic-black;
+    }
+
+    &--dark {
+      color: $basic-white;
+    }
   }
 
   &__input {
@@ -46,6 +69,16 @@
     outline: none;
     border: 2px solid $basic-white;
     padding: 0.15em 0.25em;
+
+    &--light {
+      border-color: $basic-black;
+      color: $basic-black;
+    }
+
+    &--dark {
+      border-color: $basic-white;
+      color: $basic-white;
+    }
 
     &--invalid {
       border-color: $basic-red;
@@ -55,19 +88,43 @@
   &__submit {
     @include font(1);
     margin: auto;
-    background-color: $basic-white;
     padding: 0.5em 1em;
     width: fit-content;
-    color: $basic-black;
+
+    &--light {
+      background-color: $basic-blue;
+      color: $basic-white;
+    }
+
+    &--dark {
+      background-color: $basic-white;
+      color: $basic-black;
+    }
   }
 
   &__reset {
     @include font(0.75);
     @include flexrow(center, center, 0.5em);
+
+    &--light {
+      color: $basic-black;
+    }
+
+    &--dark {
+      color: $basic-white;
+    }
   }
 
   &__highlight {
-    @include font(0.75, bold, $light-green);
+    @include font(0.75, bold);
+
+    &--light {
+      color: $lighter-green;
+    }
+
+    &--dark {
+      color: $light-green;
+    }
   }
 
   &__back {
@@ -77,6 +134,16 @@
     border-top: 1px solid $basic-white;
     padding: 1em;
     width: 100%;
+
+    &--light {
+      color: $basic-black;
+      border-color: $basic-black;
+    }
+
+    &--dark {
+      color: $basic-white;
+      border-color: $basic-white;
+    }
   }
 
   &__back-button {
@@ -89,6 +156,16 @@
     border: 1px solid $basic-white;
     padding: 0.5em 1.5em;
     text-align: center;
+
+    &--light {
+      color: $basic-black;
+      border-color: $basic-black;
+    }
+
+    &--dark {
+      color: $basic-white;
+      border-color: $basic-white;
+    }
 
     &--before:hover {
       padding-right: 1em;

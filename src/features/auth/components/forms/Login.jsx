@@ -1,10 +1,11 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { isEmailValid } from "src/utils/form";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
 import Alert from "../alerts/Alert";
+import FormInput from "../inputs/FormInput";
+import FormSubmitButton from "../buttons/FormSubmitButton";
+import FormSwitchButton from "../buttons/FormSwitchButton";
 import ForgotPasswordButton from "../buttons/ForgotPasswordButton";
 
 export default function Login({ setIsSignup }) {
@@ -69,57 +70,14 @@ export default function Login({ setIsSignup }) {
       <ForgotPasswordButton setError={setError} />
 
       <Alert message={error} />
-      <SubmitButton />
+      <FormSubmitButton label="Log in" />
 
-      <SignupButton setIsSignup={setIsSignup} />
-    </form>
-  );
-}
-
-function FormInput({ id, label, type }) {
-  const handleChange = (e) => {
-    e.target.classList.remove("auth__input--invalid");
-  };
-
-  return (
-    <div className="auth__group">
-      <label htmlFor={id} className="auth__label">
-        {label}
-      </label>
-      <input
-        id={id}
-        name={id}
-        type={type}
-        onChange={handleChange}
-        className="auth__input"
+      <FormSwitchButton
+        header="Don't have an account with us?"
+        label="Sign up"
+        direction="before"
+        setIsSignup={setIsSignup}
       />
-    </div>
-  );
-}
-
-function SubmitButton() {
-  return (
-    <button type="submit" className="auth__submit">
-      Log in
-    </button>
-  );
-}
-
-function SignupButton({ setIsSignup }) {
-  return (
-    <div className="auth__back">
-      <p>Don't have an account with us?</p>
-      <button
-        type="button"
-        onClick={() => setIsSignup(true)}
-        className="auth__back-button auth__back-button--before"
-      >
-        <FontAwesomeIcon
-          icon={faArrowLeft}
-          className="auth__arrow auth__arrow--before"
-        />
-        <p>Sign up</p>
-      </button>
-    </div>
+    </form>
   );
 }

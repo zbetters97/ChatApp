@@ -28,8 +28,15 @@
     transition: all 0.2s;
     width: fit-content;
     max-width: 800px;
-    background-color: $darker-blue;
     border-radius: 12px;
+
+    &--light {
+      background-color: $light-white;
+    }
+
+    &--dark {
+      background-color: $darker-blue;
+    }
   }
 
   &__button {
@@ -37,6 +44,14 @@
     position: absolute;
     top: 1%;
     right: 3%;
+
+    &--light {
+      color: $basic-black;
+    }
+
+    &--dark {
+      color: $basic-white;
+    }
   }
 }
 

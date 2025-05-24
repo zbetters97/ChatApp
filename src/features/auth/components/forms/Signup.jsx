@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
 import { isEmailValid } from "src/utils/form";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
 import Alert from "../alerts/Alert";
+import FormInput from "../inputs/FormInput";
+import FormSubmitButton from "../buttons/FormSubmitButton";
+import FormSwitchButton from "../buttons/FormSwitchButton";
 
 export default function Signup({ setIsSignup }) {
   const { signup } = useAuthContext();
@@ -109,57 +110,14 @@ export default function Signup({ setIsSignup }) {
       <FormInput id="repassword" label="Re-enter Password" type="password" />
 
       <Alert message={error} />
-      <SubmitButton />
+      <FormSubmitButton label="Sign up" />
 
-      <LoginButton setIsSignup={setIsSignup} />
-    </form>
-  );
-}
-
-function FormInput({ id, label, type }) {
-  const handleChange = (e) => {
-    e.target.classList.remove("auth__input--invalid");
-  };
-
-  return (
-    <div className="auth__group">
-      <label htmlFor={id} className="auth__label">
-        {label}
-      </label>
-      <input
-        id={id}
-        name={id}
-        type={type}
-        onChange={handleChange}
-        className="auth__input"
+      <FormSwitchButton
+        header="Already have an account with us?"
+        label="Log in"
+        direction="after"
+        setIsSignup={setIsSignup}
       />
-    </div>
-  );
-}
-
-function SubmitButton() {
-  return (
-    <button type="submit" className="auth__submit">
-      Sign up
-    </button>
-  );
-}
-
-function LoginButton({ setIsSignup }) {
-  return (
-    <div className="auth__back">
-      <p>Already have an account with us?</p>
-      <button
-        type="button"
-        onClick={() => setIsSignup(false)}
-        className="auth__back-button auth__back-button--after"
-      >
-        <p>Login</p>
-        <FontAwesomeIcon
-          icon={faArrowRight}
-          className="auth__arrow auth__arrow--after"
-        />
-      </button>
-    </div>
+    </form>
   );
 }

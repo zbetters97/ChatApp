@@ -1,7 +1,7 @@
 @use "src/styles/abstracts" as *;
 
 .chat-card {
-  @include flexrow(initial, center, 1em);
+  @include flexrow(initial, center, 1em);  
   position: relative;
   cursor: pointer;
   border-radius: 20px;
@@ -20,12 +20,12 @@
   }
 
   &__pin {
-    font-size: 1rem;
-    color: $basic-white;
     position: absolute;
     top: 0;
     left: 0;
     padding: 0.5em;
+    color: $basic-white;
+    font-size: 1rem;
   }
 
   &__icon {
@@ -33,11 +33,12 @@
   }
 
   &__info {
-    @include flexcol(initial, flex-start, 0.25em);
+    @include flexcol(initial, flex-start, 0.25em);   
+    overflow: hidden;
   }
 
   &__header {
-    @include flexrow(space-between, center, 1em);
+    @include flexrow(space-between, center, 0.5em);
   }
 
   &__username {
@@ -46,22 +47,19 @@
   }
 
   &__time {
-    @include font(0.5);
+    @include font(0.5, bold);
   }
 
   &__message {
     @include font(0.5, normal, $basic-white);
-  }
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
 
-  &__unread {
-    position: absolute;
-    top: 50%;
-    right: 5%;
-    transform: translate(50%, -50%);
-    border-radius: 50%;
-    background-color: $basic-blue;
-    width: 20px;
-    height: 20px;
+    &--unread {
+      font-weight: bold;
+    }
   }
 }
 

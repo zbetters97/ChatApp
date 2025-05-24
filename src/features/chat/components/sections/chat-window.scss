@@ -43,7 +43,7 @@
 
   &__messages {
     @include padding-x(1em);
-    @include flexcol($gap: 0.25em);
+    @include flexcol($gap: 0.5em);
     flex-grow: 1;
     margin-bottom: 90px;
     max-width: 100%;
