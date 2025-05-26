@@ -58,7 +58,7 @@
   &:after {
     position: absolute;
     bottom: 0;
-    z-index: 1;
+    z-index: 0;
     width: 10px;
     height: 20px;
     content: "";
@@ -142,11 +142,11 @@
   }
 
   &__like {
-    top: -15px;
+    top: -16px;
     background-color: $basic-blue;
 
     &--user {
-      left: -16px;
+      left: -17px;
 
       &.bubble__like--unliked {
         display: none;
@@ -162,7 +162,7 @@
     }
 
     &--friend {
-      right: -16px;
+      right: -17px;
 
       &:hover {
         opacity: 1;

@@ -45,13 +45,15 @@
     @include padding-x(1em);
     @include flexcol($gap: 0.5em);
     flex-grow: 1;
-    margin-bottom: 90px;
+    margin-bottom: 20px;
     max-width: 100%;
 
     &--wrapper {
+      display: flex ;
       flex-grow: 1;
+      flex-direction: column-reverse;
+      justify-content: flex-start;
       overflow-y: auto;
-      @include flexcol();
     }
   }
 

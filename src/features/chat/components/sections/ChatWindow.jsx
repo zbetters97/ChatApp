@@ -132,13 +132,14 @@ function Messages({ messages }) {
     prevMessagLength.current = messages.length;
   }, [messages]);
 
+  // Wrapper is a reverse column to allow for proper shifting
   return (
     <div
       ref={chatRef}
       className="chats__messages--wrapper"
       aria-expanded={!isCollapsed}
     >
-      <Header />
+      <NewMessage />
 
       <div className="chats__messages">
         {messages &&
@@ -150,13 +151,17 @@ function Messages({ messages }) {
                   index={index}
                   messages={messages}
                 />
-                <MessageCard message={message} />
+                <MessageCard
+                  message={message}
+                  messages={messages}
+                  index={index}
+                />
               </div>
             );
           })}
       </div>
 
-      <NewMessage />
+      <Header />
     </div>
   );
 }

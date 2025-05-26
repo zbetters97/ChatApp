@@ -19,7 +19,7 @@
   &__container {
     @include flexrow(space-between, center);
     @include padding-x(1.5em);
-    position: absolute;
+    position: sticky;
     bottom: 0;
     z-index: 1;
     backdrop-filter: blur(10px);

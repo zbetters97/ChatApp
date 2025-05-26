@@ -6,11 +6,22 @@ import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import { useChatContext } from "../../context/ChatContext";
 import "./message-card.scss";
 
-export default function MessageCard({ message }) {
+export default function MessageCard({ message, messages, index }) {
   const { globalUser } = useAuthContext();
   const { theme } = useThemeContext();
 
   const isCurrentUser = message.senderId === globalUser.uid;
+
+  /* If message is liked, check if either...
+    ...it's a different sender than the previous message OR
+    ...it's shorter than the previous message by at least 3 characters
+    If neither, don't add padding-top */
+  const isLiked =
+    message.isLiked &&
+    (message.senderId !== messages[index - 1]?.senderId ||
+      message.text.length <= messages[index - 1]?.text.length + 2)
+      ? "liked"
+      : "unliked";
 
   function handleClick(e) {
     // Reveal heart or delete button
@@ -26,7 +37,7 @@ export default function MessageCard({ message }) {
     <div
       className={`message message--${
         isCurrentUser ? "user" : "friend"
-      } message--${message.isLiked ? "liked" : "unliked"} `}
+      } message--${isLiked}`}
     >
       <MessageTime message={message} />
 
