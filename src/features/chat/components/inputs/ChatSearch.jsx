@@ -74,7 +74,7 @@ function SearchResults({ users, setUsers, inputRef }) {
           className="chat-search__user"
           aria-label="add user to chat"
         >
-          <p className="chat-search__name">{user.fullname}</p>
+          <p className="chat-search__name">{user.displayname}</p>
         </button>
       ))}
     </div>

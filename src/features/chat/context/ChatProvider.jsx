@@ -47,7 +47,7 @@ export default function ChatProvder({ children }) {
           if (a.pinned && !b.pinned) return -1;
           if (!a.pinned && b.pinned) return 1;
           if (a.pinned && b.pinned) {
-            return a.lastname.localeCompare(b.lastname);
+            return a.displayname.localeCompare(b.displayname);
           }
           return b.updatedAt - a.updatedAt;
         });

@@ -17,8 +17,6 @@ export default function Signup({ setIsSignup }) {
 
     const formData = new FormData(formRef.current);
 
-    const firstname = formData.get("firstname");
-    const lastname = formData.get("lastname");
     const displayname = formData.get("displayname");
     const email = formData.get("email");
     const password = formData.get("password");
@@ -28,31 +26,17 @@ export default function Signup({ setIsSignup }) {
     }
 
     if (
-      await signup(firstname, lastname, displayname, email, password, setError)
+      await signup(displayname, email, password, setError)
     ) {
       setIsSignup(false);
     }
   };
 
   const validateData = () => {
-    const firstname = formRef.current.elements.firstname;
-    const lastname = formRef.current.elements.lastname;
     const displayname = formRef.current.elements.displayname;
     const email = formRef.current.elements.email;
     const password = formRef.current.elements.password;
     const repassword = formRef.current.elements.repassword;
-
-    if (firstname.value === "") {
-      setError("Please enter a first name.");
-      firstname.classList.add("auth__input--invalid");
-      return false;
-    }
-
-    if (lastname.value === "") {
-      setError("Please enter a last name.");
-      lastname.classList.add("auth__input--invalid");
-      return false;
-    }
 
     if (displayname.value === "") {
       setError("Please enter a display name.");
@@ -100,10 +84,7 @@ export default function Signup({ setIsSignup }) {
       onSubmit={handleSubmit}
       className="auth__form auth__form--signup"
     >
-      <FormInput id="firstname" label="First Name" type="text" />
-      <FormInput id="lastname" label="Last Name" type="text" />
       <FormInput id="displayname" label="Display Name" type="text" />
-
       <FormInput id="email" label="Email" type="email" />
 
       <FormInput id="password" label="Password" type="password" />

@@ -109,7 +109,7 @@ function Footer() {
   return (
     <div className={`chatlist__footer chatlist__footer--${theme}`}>
       <p className={`chatlist__current-user chatlist__current-user--${theme}`}>
-        {globalUser.fullname}
+        {globalUser.displayname}
       </p>
       <button
         type="button"

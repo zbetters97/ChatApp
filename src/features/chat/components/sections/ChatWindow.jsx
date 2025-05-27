@@ -74,7 +74,6 @@ export default function ChatWindow() {
         return {
           chatId: activeChatId,
           ...message,
-          firstname: user.firstname,
         };
       })
     );
@@ -172,7 +171,7 @@ function Header() {
       <BackButton />
 
       <h2 className="chats__name">
-        {activeChatUser.fullname || "Display Name"}
+        {activeChatUser.displayname || "Display Name"}
       </h2>
     </div>
   );

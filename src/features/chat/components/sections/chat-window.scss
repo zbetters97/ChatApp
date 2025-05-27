@@ -12,7 +12,7 @@
   }
 
   &--dark {
-    background-color: $darker-blue;
+    background-color: $foreground-blue;
   }
 
   &__header {
@@ -36,14 +36,14 @@
     }
 
     &--dark {
-      background-color: $darker-blue-transparent;
+      background-color: $foreground-blue-transparent;
       color: $basic-white;
     }
   }
 
   &__messages {
     @include padding-x(1em);
-    @include flexcol($gap: 0.5em);    
+    @include flexcol($gap: 0.5em);
     flex-grow: 1;
     margin-bottom: 20px;
     max-width: 100%;

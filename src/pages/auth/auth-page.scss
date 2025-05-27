@@ -32,7 +32,7 @@
     }
 
     &--dark {
-      background-color: $darker-blue;
+      background-color: $foreground-blue;
     }
   }
 
@@ -43,8 +43,8 @@
     @include padding-y(1em);
 
     &--reset {
-      padding: 1em;
       gap: 0.75em;
+      padding: 1em;
     }
   }
 
@@ -136,13 +136,13 @@
     width: 100%;
 
     &--light {
-      color: $basic-black;
       border-color: $basic-black;
+      color: $basic-black;
     }
 
     &--dark {
-      color: $basic-white;
       border-color: $basic-white;
+      color: $basic-white;
     }
   }
 
@@ -158,13 +158,13 @@
     text-align: center;
 
     &--light {
-      color: $basic-black;
       border-color: $basic-black;
+      color: $basic-black;
     }
 
     &--dark {
-      color: $basic-white;
       border-color: $basic-white;
+      color: $basic-white;
     }
 
     &--before:hover {
@@ -206,12 +206,29 @@
       left: 0;
     }
   }
+
+  &__google {
+    @include font(0.75);
+    @include flexrow(center, center, 0.5em);
+    margin: auto;
+    background-color: $basic-blue;
+    padding: 0.75em;
+    width: fit-content;
+
+    &:hover {
+      background-color: $darker-blue;
+    }
+
+    &__icon {
+      @include font(1);
+    }
+  }
 }
 
 @include md {
   .auth {
     @include flexcol(center, center);
-    background-color: $darker-blue;
+    background-color: $foreground-blue;
     padding: 0;
     height: 100%;
 
@@ -258,6 +275,18 @@
 
     &__highlight {
       font-size: 1rem;
+    }
+
+    &__google {
+      font-size: 1rem;
+
+      &:hover {
+        background-color: $basic-blue;
+      }
+
+      &__icon {
+        font-size: 1.25rem;
+      }
     }
   }
 }

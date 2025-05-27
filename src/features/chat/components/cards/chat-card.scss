@@ -1,7 +1,7 @@
 @use "src/styles/abstracts" as *;
 
 .chat-card {
-  @include flexrow(initial, center, 1em);  
+  @include flexrow(initial, center, 1em);
   position: relative;
   cursor: pointer;
   border-radius: 20px;
@@ -33,7 +33,7 @@
   }
 
   &__info {
-    @include flexcol(initial, flex-start, 0.25em);   
+    @include flexcol(initial, flex-start, 0.25em);
     overflow: hidden;
   }
 
@@ -73,6 +73,10 @@
 
     &__username {
       font-size: 1.25rem;
+    }
+
+    &__time {
+      font-size: 0.75rem;
     }
 
     &__message {

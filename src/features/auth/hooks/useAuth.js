@@ -1,3 +1,4 @@
+import { auth, db } from "src/config/firebase";
 import {
   collection,
   doc,
@@ -10,21 +11,15 @@ import {
 import {
   createUserWithEmailAndPassword,
   fetchSignInMethodsForEmail,
+  GoogleAuthProvider,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { auth, db } from "src/config/firebase";
 
 export function useAuth() {
-  async function signup(
-    firstname,
-    lastname,
-    displayname,
-    email,
-    password,
-    setError
-  ) {
+  async function signup(displayname, email, password, setError) {
     try {
       const userCredentials = await createUserWithEmailAndPassword(
         auth,
@@ -35,9 +30,6 @@ export function useAuth() {
       const newUser = userCredentials.user;
 
       const newUserData = {
-        firstname: firstname.toLowerCase(),
-        lastname: lastname.toLowerCase(),
-        fullname: `${firstname.toLowerCase()} ${lastname.toLowerCase()}`,
         displayname: displayname.toLowerCase(),
         email: email.toLowerCase(),
         createdAt: new Date(),
@@ -90,6 +82,38 @@ export function useAuth() {
       }
 
       return false;
+    }
+  }
+
+  async function loginWithGoogle() {
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+
+      if (!result.user) return false;
+
+      const user = result.user?.reloadUserInfo;
+
+      const uid = user["uid"];
+      const displayname = user.displayName;
+      const email = user.email;
+
+      const newUserData = {
+        displayname: displayname.toLowerCase(),
+        email: email.toLowerCase(),
+        createdAt: new Date(),
+      };
+
+      const fetchedUser = await getUserById(uid);
+
+      if (!fetchedUser) {
+        const userRef = doc(db, "users", uid);
+        await setDoc(userRef, newUserData);
+      }
+
+      return true;
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -163,8 +187,8 @@ export function useAuth() {
       const usersRef = collection(db, "users");
       const q = query(
         usersRef,
-        where("fullname", ">=", name),
-        where("fullname", "<", end)
+        where("displayname", ">=", name),
+        where("displayname", "<", end)
       );
       const querySnapshot = await getDocs(q);
       if (querySnapshot.empty) return [];
@@ -188,6 +212,7 @@ export function useAuth() {
     signup,
     usernameAvailable,
     login,
+    loginWithGoogle,
     logout,
     checkIfEmailExists,
     resetPassword,
