@@ -1,41 +1,54 @@
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
 import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import { useChatContext } from "../../context/ChatContext";
 import "./chat-search.scss";
 
 export default function ChatSearch() {
+  const [search, setSearch] = useState("");
   const [users, setUsers] = useState([]);
-  const inputRef = useRef(null);
 
   return (
     <div className="chat-search">
-      <SearchInput inputRef={inputRef} setUsers={setUsers} />
-      <SearchResults users={users} setUsers={setUsers} inputRef={inputRef} />
+      <SearchInput search={search} setSearch={setSearch} setUsers={setUsers} />
+      <SearchResults users={users} setUsers={setUsers} setSearch={setSearch} />
     </div>
   );
 }
 
-function SearchInput({ inputRef, setUsers }) {
+function SearchInput({ search, setSearch, setUsers }) {
   const { globalUser, searchByName } = useAuthContext();
   const { theme } = useThemeContext();
 
-  const handleSearch = async (e) => {
-    if (e.target.value.trim() === "") {
-      setUsers([]);
-      return;
-    }
+  const [isSearching, setIsSearching] = useState(false);
 
-    const fetchedUsers = await searchByName(e.target.value, globalUser.uid);
+  useEffect(() => {
+    const handleSearch = async () => {
+      if (isSearching) return;
 
-    setUsers(fetchedUsers);
-  };
+      setIsSearching(true);
+
+      try {
+        if (search === "") {
+          setUsers([]);
+          return;
+        }
+
+        const fetchedUsers = await searchByName(search, globalUser.uid);
+        setUsers(fetchedUsers);
+      } finally {
+        setIsSearching(false);
+      }
+    };
+
+    handleSearch();
+  }, [search, isSearching]);
 
   return (
     <input
       type="text"
-      ref={inputRef}
-      onChange={handleSearch}
+      value={search}
+      onChange={(e) => setSearch(e.target.value.trim())}
       placeholder="Search for a user..."
       className={`chat-search__input chat-search__input--${theme}`}
       aria-label="search for a user"
@@ -43,13 +56,13 @@ function SearchInput({ inputRef, setUsers }) {
   );
 }
 
-function SearchResults({ users, setUsers, inputRef }) {
+function SearchResults({ users, setUsers, setSearch }) {
   const { globalUser, getUserById } = useAuthContext();
   const { chats, addChat, setActiveChatId, setActiveChatUser } =
     useChatContext();
 
   const handleAddUser = async (friendId) => {
-    inputRef.current.value = "";
+    setSearch("");
     setUsers([]);
 
     const foundChat = chats.find((chat) => chat.recipientId === friendId);

@@ -185,22 +185,41 @@ export function useAuth() {
       );
 
       const usersRef = collection(db, "users");
-      const q = query(
+      
+      const qName = query(
         usersRef,
         where("displayname", ">=", name),
         where("displayname", "<", end)
       );
-      const querySnapshot = await getDocs(q);
-      if (querySnapshot.empty) return [];
 
-      const users = querySnapshot.docs.map((doc) => {
+      const qEmail = query(
+        usersRef,
+        where("email", ">=", name),
+        where("email", "<", end)
+      );
+
+      const queryName = await getDocs(qName);
+      const queryEmail = await getDocs(qEmail);
+
+      const nameUsers = queryName.docs.map((doc) => {
         return {
           uid: doc.id,
           ...doc.data(),
         };
       });
 
-      const filteredUsers = users.filter((user) => user.uid !== currentUserId);
+      const emailUsers = queryEmail.docs.map((doc) => {
+        return {
+          uid: doc.id,
+          ...doc.data(),
+        };
+      });
+
+      const filteredUsers = [
+        ...new Map(
+          [...nameUsers, ...emailUsers].map((user) => [user.uid, user])
+        ).values(),
+      ].filter((user) => user.uid !== currentUserId);
 
       return filteredUsers;
     } catch (error) {

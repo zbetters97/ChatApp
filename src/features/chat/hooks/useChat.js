@@ -9,7 +9,6 @@ import {
   query,
   setDoc,
   updateDoc,
-  where,
 } from "firebase/firestore";
 
 export function useChat() {
