@@ -4,6 +4,7 @@ import { isEmailValid } from "src/utils/form";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
 import Alert from "../alerts/Alert";
 import FormInput from "../inputs/FormInput";
+import GoogleLogin from "../buttons/GoogleLogin";
 import FormSubmitButton from "../buttons/FormSubmitButton";
 import FormSwitchButton from "../buttons/FormSwitchButton";
 import ForgotPasswordButton from "../buttons/ForgotPasswordButton";
@@ -78,6 +79,8 @@ export default function Login({ setIsSignup }) {
         direction="before"
         setIsSignup={setIsSignup}
       />
+
+      <GoogleLogin />
     </form>
   );
 }

@@ -4,7 +4,6 @@ import Login from "src/features/auth/components/forms/Login";
 import Signup from "src/features/auth/components/forms/Signup";
 import { useAuthContext } from "src/features/auth/context/AuthContext";
 import { useThemeContext } from "src/features/theme/context/ThemeContext";
-import GoogleLogin from "src/features/auth/components/buttons/GoogleLogin";
 import "./auth-page.scss";
 
 export default function AuthPage() {
@@ -48,8 +47,6 @@ export default function AuthPage() {
         ) : (
           <Login setIsSignup={setIsSignup} />
         )}
-
-        <GoogleLogin />
       </div>
     </section>
   );
