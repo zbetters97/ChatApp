@@ -2,14 +2,14 @@
 
 .message {
   @include flexrow(initial, center, 0.5em);
-  transition: padding 0.2s;
+  transition: margin 0.2s;
 
   &--user {
     flex-direction: row-reverse;
   }
 
   &--liked {
-    padding-top: 1.25em;
+    margin-top: 1em;
   }
 
   &__time {
@@ -173,6 +173,14 @@
       opacity: 1;
       color: $lighter-red;
     }
+
+    &--unliked {
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+    }
+
+    &--active {
+      animation: pulse 0.8s;
+    }
   }
 
   &__text {
@@ -247,5 +255,20 @@
     &__text {
       font-size: 1.5rem;
     }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  90% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
   }
 }

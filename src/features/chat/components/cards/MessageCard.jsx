@@ -5,6 +5,7 @@ import { useAuthContext } from "src/features/auth/context/AuthContext";
 import { useThemeContext } from "src/features/theme/context/ThemeContext";
 import { useChatContext } from "../../context/ChatContext";
 import "./message-card.scss";
+import { useState } from "react";
 
 export default function MessageCard({ message, messages, index }) {
   const { globalUser } = useAuthContext();
@@ -24,6 +25,9 @@ export default function MessageCard({ message, messages, index }) {
       : "unliked";
 
   function handleClick(e) {
+    // If the bubble is already clicked, do nothing
+    if (e.target.parentNode.classList.contains("bubble--clicked")) return;
+
     // Reveal heart or delete button
     e.target.parentNode.classList.add("bubble--clicked");
 
@@ -111,10 +115,18 @@ function MessageLikeButton({ message, isCurrentUser }) {
   const { theme } = useThemeContext();
 
   const isLiked = message.isLiked ? "liked" : "unliked";
+  const [isActive, setIsActive] = useState(false);
+
   const position = isCurrentUser ? "user" : "friend";
 
   async function handleLike() {
     if (isCurrentUser) return;
+
+    if (isLiked === "unliked") {
+      setIsActive(true);
+      setTimeout(() => setIsActive(false), 800);
+    }
+
     await likeMessage(message.id, message.chatId, !message.isLiked);
   }
 
@@ -122,7 +134,9 @@ function MessageLikeButton({ message, isCurrentUser }) {
     <button
       type="button"
       onClick={handleLike}
-      className={`bubble__button bubble__like bubble__like--${theme} bubble__like--${isLiked} bubble__like--${position}`}
+      className={`bubble__button bubble__like bubble__like--${theme} bubble__like--${isLiked} bubble__like--${position} ${
+        isActive ? "bubble__like--active" : ""
+      }`}
       aria-label="like message"
     >
       <FontAwesomeIcon icon={faHeart} />
