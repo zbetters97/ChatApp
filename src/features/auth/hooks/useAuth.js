@@ -94,7 +94,7 @@ export function useAuth() {
 
       const user = result.user?.reloadUserInfo;
 
-      const uid = user["uid"];
+      const uid = user["uid"] || user.localId;
       const displayname = user.displayName;
       const email = user.email;
 
@@ -185,7 +185,7 @@ export function useAuth() {
       );
 
       const usersRef = collection(db, "users");
-      
+
       const qName = query(
         usersRef,
         where("displayname", ">=", name),

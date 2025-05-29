@@ -228,9 +228,16 @@
 @include md {
   .auth {
     @include flexcol(center, center);
-    background-color: $foreground-blue;
     padding: 0;
     height: 100%;
+
+    &--light {
+      background-color: $light-white;
+    }
+
+    &--dark {
+      background-color: $foreground-blue;
+    }
 
     &__container {
       box-shadow: none;

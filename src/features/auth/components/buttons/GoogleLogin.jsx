@@ -10,6 +10,7 @@ export default function GoogleLogin() {
   async function handleGoogle() {
     if (await loginWithGoogle()) {
       navigate("/");
+      window.location.reload();
     }
   }
 

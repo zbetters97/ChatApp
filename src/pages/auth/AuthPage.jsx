@@ -38,7 +38,7 @@ export default function AuthPage() {
   }
 
   return (
-    <section className="auth">
+    <section className={`auth auth--${theme}`}>
       <div className={`auth__container auth__container--${theme}`}>
         <Header isSignup={isSignup} />
 
